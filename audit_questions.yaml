@@ -1,0 +1,984 @@
+组织环境:
+  q1:
+    type: "XO"
+    description: "是否建立资产管理组织机构？"
+  q2:
+    type: "XO"
+    description: "是否设置资产管理部门？"
+  q3:
+    type: "XO"
+    description: "是否设置资产管理专职岗位？"
+  q4:
+    type: "PW"
+    description: "是否明确设备设施全生命周期不同阶段管理部门的管理职责？"
+    sub_questions:
+      - "规划投资"
+      - "工程建设"
+      - "运营维护"
+      - "退役处置"
+  q5:
+    type: "PJ"
+    description: "是否明确设备设施全生命周期不同阶段管理部门的岗位职责？"
+
+领导力:
+  q1:
+    type: "XO"
+    description: "是否明确组织资产管理的主管领导？"
+  q2:
+    type: "PJ"
+    description: "是否明确本单位资产管理思路？"
+  q3:
+    type: "PJ"
+    description: "是否关注资产管理动态并明确本年度资产管理工作计划并积极推动？"
+  q4:
+    type: "PW"
+    description: "是否积极推动建立健全资产管理体系？"
+    sub_questions:
+      - "是否参与体系建立"
+      - "是否了解体系文件的内容"
+      - "是否推动体系的实施"
+  q5:
+    type: "PW"
+    description: "是否组织建立合规风险识别机制和风险管理机制？"
+    sub_questions:
+      - "合规风险识别机制"
+      - "风险管理机制"
+  q6:
+    type: "XO"
+    description: "是否检查本单位资产管理工作开展情况？"
+  q7:
+    type: "PJ"
+    description: "是否了解本单位资产管理的薄弱环节？"
+  q8:
+    type: "PW"
+    description: "是否定期组织与相关方的沟通，听取相关方的意见和建议？"
+    sub_questions:
+      - "政府主管部门"
+      - "股东方及员工"
+      - "顾客"
+      - "社区及非社区组织"
+      - "承包商"
+  q9:
+    type: "XO"
+    description: "是否组织总结分享资产管理事故经验与教训？"
+  q10:
+    type: "XO"
+    description: "是否组织资产管理评审？"
+  q11:
+    type: "PW"
+    description: "是否组织制定资产管理目标？"
+    sub_questions:
+      - "中长期目标"
+      - "年度目标"
+  q12:
+    type: "PW"
+    description: "是否组织制订资产管理工作计划？"
+    sub_questions:
+      - "中长期工作计划"
+      - "年度工作计划"
+  q13:
+    type: "XO"
+    description: "是否组织总结分享设备设施事故经验与教训？"
+  q14:
+    type: "XO"
+    description: "是否组织资产管理评审？"
+  q15:
+    type: "PJ"
+    description: "是否了解资产管理方针？"
+  q16:
+    type: "XO"
+    description: "是否制定本单位资产管理方针？"
+  q17:
+    type: "PW"
+    description: "制定的资产管理方针是否覆盖以下内容："
+    sub_questions:
+      - "全生命周期"
+      - "基于风险"
+      - "合规运行"
+      - "持续改进"
+      - "经济可靠"
+
+策划:
+  q1:
+    type: "XO"
+    description: "是否制定资产管理中长期管理目标与计划？"
+  q2:
+    type: "PW"
+    description: "资产管理中长期管理目标与计划是否满足"
+    sub_questions:
+      - "装备更新及替代计划"
+      - "规划项目的前期技术储备"
+      - "新技术、新设备、新方法的应用"
+      - "完整性管理相关计划"
+      - "国际、国内相关要求及技术发展分析与展望"
+  q3:
+    type: "XO"
+    description: "是否定期对中长期目标与计划进行评估，需要时进行修订完善？"
+  q4:
+    type: "XO"
+    description: "是否制定资产管理年度目标？"
+  q5:
+    type: "PW"
+    description: "资产管理年度目标是否满足："
+    sub_questions:
+      - "与中长期目标与计划保持一致"
+      - "包括管理、技术和经济三方面"
+  q6:
+    type: "PW"
+    description: "资产管理年度目标是否满足："
+    sub_questions:
+      - "具体的、可测量的、可达到的、适宜的及有时限的"
+      - "通过正式渠道传递至应单位或部门"
+  q7:
+    type: "XO"
+    description: "是否建立资产管理关键绩效指标？"
+  q8:
+    type: "XO"
+    description: "是否将资产管理目标和关键绩效指标传递给相关部门？"
+  q9:
+    type: "XO"
+    description: "是否上报上年度目标和计划完成情况，向上级单位提交完整性管理工作年报？"
+  q10:
+    type: "XO"
+    description: "是否根据年度目标制订资产管理年度工作计划？"
+  q11:
+    type: "PW"
+    description: "资产管理工作计划是否明确："
+    sub_questions:
+      - "责任人"
+      - "工作内容"
+      - "费用预算"
+      - "启动和完成日期"
+  q12:
+    type: "PW"
+    description: "年度工作计划的工作内容是否包括："
+    sub_questions:
+      - "风险管理"
+      - "法律法规及相关要求识别和合规评价"
+      - "人员队伍建设"
+      - "资产更新改造"
+      - "资产检维修"
+      - "检验检测计划"
+      - "资产检查"
+      - "审核"
+      - "管理评审"
+  q13:
+    type: "XO"
+    description: "是否对计划的执行情况进行跟踪和统计？"
+  q14:
+    type: "XO"
+    description: "发生重大变化时变更、更新年度计划？"
+  q15:
+    type: "XO"
+    description: "是否建立法律法规及相关要求识别与评价管理要求？"
+  q16:
+    type: "PW"
+    description: "识别资产设施法律法规及相关要求是否包括："
+    sub_questions:
+      - "国际相关公约、协议(若涉及)"
+      - "资产相关法律法规"
+      - "资产相关强制性标准规范"
+      - "选用的推荐性标准规范"
+      - "上级公司要求"
+  q17:
+    type: "PW"
+    description: "是否建立资产适用的法律法规及相关要求清单？"
+    sub_questions:
+      - "法律法规及相关要求名称"
+      - "法律法规及相关要求编号"
+      - "法律法规及相关要求适用条款"
+      - "法律法规及相关要求生效日期"
+  q18:
+    type: "PW"
+    description: "是否识别和定期更新所适用的法律法规及相关要求？"
+    sub_questions:
+      - "定期识别所适用的法规法规及相关要求"
+      - "更新所识别的法律法规及相关要求"
+  q19:
+    type: "PJ"
+    description: "是否定期对公司资产法律法规及相关要求符合情况进行评价？"
+  q20:
+    type: "PJ"
+    description: "对不符合法律法规及相关要求的情况，是否采取了纠正和预防措施，并进行了跟踪验证？"
+  q21:
+    type: "XO"
+    description: "是否将法律法规及相关要求传达至相关岗位人员？"
+  q22:
+    type: "PW"
+    description: "是否建立资产风险管理要求？"
+    sub_questions:
+      - "风险接受准则"
+      - "风险评估"
+      - "风险应对"
+      - "风险动态管理"
+  q23:
+    type: "PW"
+    description: "是否制定了统一适用的风险可接受准则，且考虑了以下方面："
+    sub_questions:
+      - "可能发生的后果的性质和类型及衡量方法"
+      - "可能性的度量方法"
+      - "可能性及后果的时限"
+      - "风险等级的确定方法"
+      - "可接受或可容忍的风险水平或等级"
+      - "考虑多种风险的组合的影响"
+      - "风险可接受准则是否在公司范围内通过正式渠道达成一致"
+  q24:
+    type: "PW"
+    description: "是否针对资产全生命周期开展风险评估工作？"
+    sub_questions:
+      - "风险识别"
+      - "风险分析"
+      - "风险评价"
+  q25:
+    type: "PW"
+    description: "是否对资产选择有针对性的风险评估技术进行专项风险评估，包括："
+    sub_questions:
+      - "基于风险的检验(适用时)"
+      - "以可靠性为中心的维修(适用时)"
+      - "失效模式与影响分析(适用时)"
+      - "危险与可操作性分析(适用时)"
+      - "安全完整性等级评估(适用时)"
+      - "定量风险分析(适用时)"
+      - "可靠性、可用性和可维护性分析(适用时)"
+  q26:
+    type: "PJ"
+    description: "风险评估是否覆盖所有资产？"
+  q27:
+    type: "XO"
+    description: "是否对风险评估结果进行汇总统计？"
+  q28:
+    type: "PW"
+    description: "是否对高风险进行风险应对？"
+    sub_questions:
+      - "制订应对措施"
+      - "制订风险应对计划(资源需求、责任人、完成时间等)"
+      - "实施应对计划及跟踪验证"
+  q29:
+    type: "PW"
+    description: "是否对中风险进行风险应对？"
+    sub_questions:
+      - "制订应对措施，基于ALARP原则评估措施"
+      - "制订风险应对计划(资源需求责任人、完成时间等)"
+      - "实施应对计划及跟踪验证"
+  q30:
+    type: "PW"
+    description: "是否开展剩余风险评估，确定风险降低到可接受程度？"
+    sub_questions:
+      - "高、中风险是否降到可接受程度"
+      - "风险的处置措施是否具有可操作性和有效"
+  q31:
+    type: "XO"
+    description: "是否对高、中风险进行监督、检查？"
+  q32:
+    type: "XO"
+    description: "是否将资产高中风险的信息传递给风险相关岗位人员？"
+  q33:
+    type: "PW"
+    description: "是否对资产风险进行动态评估，包括："
+    sub_questions:
+      - "资产有关法律法规和相关要求发生变化时"
+      - "资产变更时"
+      - "资产运行环境变化时"
+      - "发现风险识别有遗留时"
+      - "资产进行大修后"
+      - "资产重新启用"
+      - "发生事故时"
+      - "运用新工艺、新技术、新材料、新设备时"
+  q34:
+    type: "XO"
+    description: "风险再评估后是否更新风险清单？"
+
+支持:
+  q1:
+    type: "PW"
+    description: "是否建立资产管理队伍，包括："
+    sub_questions:
+      - "管理人员"
+      - "技术人员"
+      - "操作人员"
+  q2:
+    type: "PJ"
+    description: "资产管理相关人员是否有相应的岗位晋升机制？"
+  q3:
+    type: "PJ"
+    description: "是否建立资产管理专家库？"
+  q4:
+    type: "PW"
+    description: "资产管理相关岗位是否具备国家和公司要求的资格、经验和能力？"
+    sub_questions:
+      - "管理人员"
+      - "技术人员"
+      - "操作人员"
+  q5:
+    type: "PJ"
+    description: "是否对资产管理相关人员能力进行评估分析，并与培训需求相衔接？"
+  q6:
+    type: "PW"
+    description: "是否制订资产管理相关的培训计划，包括："
+    sub_questions:
+      - "管理类培训"
+      - "技术类培训"
+      - "操作类培训"
+  q7:
+    type: "PJ"
+    description: "是否按照资产培训计划实施？"
+  q8:
+    type: "XO"
+    description: "在培训时是否确保岗位人员理解并掌握资产管理要求？"
+  q9:
+    type: "XO"
+    description: "是否定期开展资产管理交流？"
+  q10:
+    type: "XO"
+    description: "组织是否建立信息反馈机制？"
+  q11:
+    type: "PJ"
+    description: "组织是否将收集资产运行维护阶段的相关意见和建议及时反馈到后续项目规划投资及工程建设阶段？"
+  q12:
+    type: "PJ"
+    description: "组织是否定期与相关方组织沟通会，听取相关方对资产管理的建议和意见？"
+  q13:
+    type: "PW"
+    description: "组织是否广泛收集和获取资产先进管理知识，包括但不限于以下内容："
+    sub_questions:
+      - "国内外资产管理标准"
+      - "成熟管理经验"
+      - "科技成果"
+      - "良好实践"
+      - "新技术"
+      - "新工艺"
+      - "新材料"
+  q14:
+    type: "PJ"
+    description: "组织是否对收集和获取的资产先进管理知识开展信息交流与共享？"
+  q15:
+    type: "XO"
+    description: "组织是否建立资产信息管理程序？"
+  q16:
+    type: "PW"
+    description: "组织是否建立了资产管理台账，包括："
+    sub_questions:
+      - "资产编号、位号"
+      - "名称"
+      - "规格、技术参数"
+      - "状态"
+      - "制造厂家"
+      - "投产日期"
+  q17:
+    type: "PW"
+    description: "组织是否建立了资产管理档案？"
+    sub_questions:
+      - "出厂文件"
+      - "检维修操作规程"
+      - "检维修记录"
+      - "事故记录"
+      - "故障记录"
+      - "更新改造记录"
+  q18:
+    type: "PW"
+    description: "组织是否对资产全生命周期管理过程中的信息进行识别、采集、处理、统计与分析，信息应包括以下三个方面："
+    sub_questions:
+      - "静态数据"
+      - "动态数据"
+      - "分析评估数据"
+  q19:
+    type: "XO"
+    description: "组织是否将资产数据完整作为建设项目完工验收的内容之一？"
+  q20:
+    type: "PW"
+    description: "组织是否建立文件化信息管理要求，并包括以下方面："
+    sub_questions:
+      - "文件化信息分类"
+      - "体系文件编号规则"
+      - "体系文件的发放和保管(如涉及)"
+  q21:
+    type: "PJ"
+    description: "组织的文档资料管理是否规范？"
+  q22:
+    type: "PW"
+    description: "组织是否建立资产管理信息系统，并包括以下内容："
+    sub_questions:
+      - "管理(具备相关功能)"
+      - "技术(具备相关功能)"
+      - "经济(具备相关功能)"
+      - "全生命周期管理(具备相关功能)"
+  q23:
+    type: "PJ"
+    description: "资产管理信息系统录入数据是否完整？"
+  q24:
+    type: "PJ"
+    description: "资产管理信息系统录入的资产相关数据是否准确？"
+  q25:
+    type: "PJ"
+    description: "资产管理信息系统录入数据是否及时？"
+  q26:
+    type: "PJ"
+    description: "资产管理信息系统的应用情况及效果是否良好？"
+  q27:
+    type: "PJ"
+    description: "是否建立了资产信息系统里数据信息审查的相关要求，定期开展数据信息审查工作？"
+  q28:
+    type: "PJ"
+    description: "组织资产管理信息系统是否考虑兼容并上下对接，保持资产管理信息传递渠道的通畅，实现信息共享？"
+  q29:
+    type: "XO"
+    description: "组织是否定期对信息系统进行考核？"
+
+运行:
+  q1:
+    type: "PW"
+    description: "组织在规划投资阶段是否关注了："
+    sub_questions:
+      - "设计基础"
+      - "主要资产选择"
+      - "主工艺流程"
+      - "风险评估"
+      - "关键资产的工程方案"
+  q2:
+    type: "PW"
+    description: "组织在项目规划投资阶段是否参考了以往项目建设和运营维护阶段的经验教训？"
+    sub_questions:
+      - "调研同类型项目"
+      - "收集汇总同类型项目的信息"
+  q3:
+    type: "PJ"
+    description: "组织在规划投资阶段是否辨识了影响资产的因素，并提出了应对措施？"
+  q4:
+    type: "PJ"
+    description: "组织是否在可行性研究过程中分析了影响资产全生命周期成本的相关要求，并参照以往经验教训对资产全生命周期费用优化分析？"
+  q5:
+    type: "PJ"
+    description: "组织是否对资产可操作性、可维护性与可靠性在该阶段方案中实现的策略进行了分析？"
+  q6:
+    type: "PW"
+    description: "组织是否在规划投资阶段对后续阶段的资产管理提出了要求或建议，包括："
+    sub_questions:
+      - "工程建设阶段"
+      - "运营维护阶段"
+      - "退役处置阶段"
+  q7:
+    type: "PW"
+    description: "资产主管部门是否派遣管理人员参与了下列节点的审查："
+    sub_questions:
+      - "可行性研究阶段审查"
+      - "FID阶段审查"
+  q8:
+    type: "PW"
+    description: "工程建设主管部门是否派遣管理人员参与了下列节点的审查："
+    sub_questions:
+      - "可行性研究阶段审查"
+      - "FID最终决策阶段审查"
+  q9:
+    type: "PJ"
+    description: "组织是否明确了参与规划投资阶段资产审查人员的能力要求？"
+  q10:
+    type: "PJ"
+    description: "组织是否明确了管理人员关键节点审查内容的要求？"
+  q11:
+    type: "XO"
+    description: "组织是否明确了工程建设阶段涉及资产管理的部门职能？"
+  q12:
+    type: "XO"
+    description: "组织是否明确了工程建设阶段涉及资产管理岗位人员职责？"
+  q13:
+    type: "PJ"
+    description: "组织是否在程序文件或相关要求中明确了工程建设阶段资产管理要求？"
+  q14:
+    type: "PW"
+    description: "工程建设阶段是否建立了下列要求，包括："
+    sub_questions:
+      - "质量管理要求"
+      - "安全管理要求"
+      - "进度管理要求"
+      - "费用管理要求"
+  q15:
+    type: "PJ"
+    description: "组织是否明确了工程设计方案技术参数与初步设计符合性确认的要求？"
+  q16:
+    type: "XO"
+    description: "组织是否在工程建设阶段进行了关键资产的识别？"
+  q17:
+    type: "XO"
+    description: "组织是否在工程建设阶段针对资产开展了风险评估工作？"
+  q18:
+    type: "PJ"
+    description: "组织是否对可行性研究和FID阶段提出的资产管理要求进行了细化与落实？"
+  q19:
+    type: "PW"
+    description: "组织是否在工程建设阶段提出了后续阶段资产完整性管理要求与保障措施，包括："
+    sub_questions:
+      - "运营维护阶段"
+      - "退役处置阶段"
+  q20:
+    type: "PJ"
+    description: "组织在设备技术选型过程及采购阶段，是否对全生命周期成本进行了分析，并结合资产技术性和经济性进行了综合评判？"
+  q21:
+    type: "PW"
+    description: "资产主管部门在工程建设阶段是否开展了以下工作："
+    sub_questions:
+      - "明确了关键节点审查内容的要求"
+      - "派遣资产管理人员参与了工程建设阶段关键节点的审查"
+      - "提出了与资产相关的意见或建议"
+  q22:
+    type: "PJ"
+    description: "项目移交前，是否检查工程建设阶段可能遗留的资产有关问题，并对发现的问题及时进行了整改关闭？"
+  q23:
+    type: "XO"
+    description: "组织是否建立了资产管理体系？"
+  q24:
+    type: "XO"
+    description: "资产管理体系是否明确了适用范围？"
+  q25:
+    type: "PW"
+    description: "资产管理体系是否符合下列要求："
+    sub_questions:
+      - "体系自上而下逐级细化"
+      - "基于风险"
+      - "覆盖全生命周期"
+      - "形成了PDCA循环"
+  q26:
+    type: "PJ"
+    description: "资产管理体系是否有各阶段衔接要求？"
+  q27:
+    type: "PJ"
+    description: "资产管理体系是否有可操作性？"
+  q28:
+    type: "PJ"
+    description: "组织是否建立了基于风险的检维修策略？"
+  q29:
+    type: "PW"
+    description: "组织是否系统规划了现场关键资产的检维修活动，包括："
+    sub_questions:
+      - "制订了中长期检维修计划/滚动计划(如涉及)"
+      - "制订了年度检维修计划"
+      - "制订了月度检维修计划"
+  q30:
+    type: "PW"
+    description: "组织是否针对资产制定了以下规程或作业指导书，包括："
+    sub_questions:
+      - "使用维护保养规程或作业指导书"
+      - "检修规程或作业指导书"
+  q31:
+    type: "XO"
+    description: "组织是否建立了资产分级准则？"
+  q32:
+    type: "PW"
+    description: "组织是否建立了设备分级台账，是否按照分级准则分为："
+    sub_questions:
+      - "关键资产(A级)"
+      - "重要资产(B级)"
+      - "一般资产(C级)"
+  q33:
+    type: "PJ"
+    description: "组织是否明确了资产分级台账更新要求，并定期识别更新？"
+  q34:
+    type: "PW"
+    description: "组织是否针对不同级别的设备制定了针对性的管理策略并执行，包括："
+    sub_questions:
+      - "检修计划管理"
+      - "检维修规程"
+      - "故障管理及故障数据库"
+      - "事故和应急管理"
+      - "状态监测"
+      - "资产评价"
+      - "检修管理"
+      - "备品备件"
+  q35:
+    type: "XO"
+    description: "组织是否结合自身的业务特点，建立了资产腐蚀管理要求？"
+  q36:
+    type: "PJ"
+    description: "组织是否结合设备类型，制定并开展了资产腐蚀监测及检测工作，分析优化资产腐蚀管理要求？"
+  q37:
+    type: "XO"
+    description: "组织是否结合自身业务特点，建立了设备润滑管理要求，包括五定三过滤等内容？"
+  q38:
+    type: "PJ"
+    description: "组织是否按照设备润滑要求，开展了设备润滑工作，并留存了记录？"
+  q39:
+    type: "XO"
+    description: "组织是否结合自身业务特点，建立了资产状态监测管理要求？"
+  q40:
+    type: "PJ"
+    description: "组织是否按照状态监测要求执行，并定期对状态监测数据进行了分析工作，用以优化监测资产管理要求？"
+  q41:
+    type: "PJ"
+    description: "组织是否结合自身业务特点，建立了资产检验检测要求，检验检测要求是否完整？"
+  q42:
+    type: "XO"
+    description: "组织是否按照检验检测要求开展了相关工作，并建立资产检验检测清单跟踪资产检验检测状态？"
+  q43:
+    type: "PW"
+    description: "组织是否对资产更新改造项目进行了全过程管理，并留存了记录，包括："
+    sub_questions:
+      - "选型"
+      - "购置"
+      - "安装"
+      - "验收"
+      - "后评价"
+  q44:
+    type: "PJ"
+    description: "组织是否对大型资产开展了全生命周期的成本与经济性分析评价工作，为制订和实施资产效益提升方案提供决策依据？"
+  q45:
+    type: "PJ"
+    description: "组织是否制定了资产的经济指标，并定期进行了统计分析，统计分析后有无改进措施？"
+  q46:
+    type: "PJ"
+    description: "组织的资产维修策略是否考虑了经济性，包括确定经济维修方式、经济维修周期？"
+  q47:
+    type: "XO"
+    description: "组织是否进行了资产状态管理工作？"
+  q48:
+    type: "PJ"
+    description: "组织是否借助信息系统实现了资产综合信息动态管理？"
+  q49:
+    type: "PW"
+    description: "组织是否明确了资产退役处置的要求，包括："
+    sub_questions:
+      - "退役处置条件"
+      - "退役处置流程"
+      - "数据分析和保存"
+  q50:
+    type: "PJ"
+    description: "组织是否按照相关要求进行了资产的退役处置？"
+  q51:
+    type: "PW"
+    description: "退役处置决策前，是否对资产进行了分析，包括："
+    sub_questions:
+      - "技术性分析"
+      - "经济性分析"
+  q52:
+    type: "PW"
+    description: "资产退役前，是否开展了下列工作："
+    sub_questions:
+      - "进行了退役风险评估"
+      - "对资产状况进行了分析论证"
+  q53:
+    type: "PW"
+    description: "资产退役前，是否开展了下列工作："
+    sub_questions:
+      - "对处置后对生产经营的影响进行了分析论证"
+      - "对处置方式进行了分析论证"
+  q54:
+    type: "PJ"
+    description: "退役处置过程是否合理合规？"
+  q55:
+    type: "XO"
+    description: "组织是否建立资产变更管理程序？"
+  q56:
+    type: "XO"
+    description: "组织是否明确资产变更管理范围？"
+  q57:
+    type: "XO"
+    description: "组织是否规定变更分类分级的要求？"
+  q58:
+    type: "XO"
+    description: "组织是否规定变更的触发条件？"
+  q59:
+    type: "XO"
+    description: "组织是否规定变更前进行风险评估及采取相应的应对措施的要求？"
+  q60:
+    type: "XO"
+    description: "组织是否规定变更审批流程？"
+  q61:
+    type: "XO"
+    description: "组织是否规定变更档案管理的要求？"
+  q62:
+    type: "XO"
+    description: "组织是否规定变更相关培训的要求？"
+  q63:
+    type: "PW"
+    description: "组织变更内容描述是否包括以下内容："
+    sub_questions:
+      - "变更简明原因"
+      - "变更项目描述"
+      - "风险评估"
+      - "工作量概述"
+      - "完成时间"
+      - "变更后的实施程序或具体方案"
+  q64:
+    type: "XO"
+    description: "变更申请是否符合变更触发条件？"
+  q65:
+    type: "PJ"
+    description: "风险应对措施是否落实？"
+  q66:
+    type: "XO"
+    description: "组织资产变更分级是否按照要求执行？"
+  q67:
+    type: "XO"
+    description: "组织资产变更分类是否按照要求执行？"
+  q68:
+    type: "XO"
+    description: "组织是否指定要求变更负责人负责变更过程管理？"
+  q69:
+    type: "XO"
+    description: "组织是否变更申请获得批准后方可实施变更？"
+  q70:
+    type: "PJ"
+    description: "组织在变更过程中是否进行跟踪和监督管理，保证所有变更得到有效管控？"
+  q71:
+    type: "XO"
+    description: "组织临时变更超过规定期限，是否重新执行变更程序？"
+  q72:
+    type: "XO"
+    description: "组织是否组织了变更验收，并形成了验收记录？"
+  q73:
+    type: "XO"
+    description: "组织是否及时更新并保存所有应变更的图纸和文件？"
+  q74:
+    type: "XO"
+    description: "组织是否对相关人员进行了培训？"
+  q75:
+    type: "PJ"
+    description: "组织是否对重大变更的变更效果进行评估与跟踪？"
+  q76:
+    type: "XO"
+    description: "组织是否形成了变更清单？"
+  q77:
+    type: "XO"
+    description: "组织是否建立了资产承包商的相关制度与要求？"
+  q78:
+    type: "PW"
+    description: "组织是否在技术要求中明确对承包商资质和能力要求，并包括以下内容："
+    sub_questions:
+      - "相应资质要求"
+      - "人员能力要求"
+  q79:
+    type: "PW"
+    description: "组织与不同服务模式的承包商签订合同时，合同应包括以下主要内容："
+    sub_questions:
+      - "双方应履行的职责"
+      - "各自的权利"
+      - "各自应履行的义务"
+      - "违规可能产生的后果"
+  q80:
+    type: "XO"
+    description: "承包商进场前，组织是否审核承包商人员的职业资格证书、特种作业人员证书等？"
+  q81:
+    type: "XO"
+    description: "承包商作业前是否进行了技术交底？"
+  q82:
+    type: "PW"
+    description: "组织是否要求并监督承包商遵循本单位管理体系要求？"
+    sub_questions:
+      - "是否要求承包商遵循本单位管理体系要求"
+      - "是否监督承包商遵循本单位管理体系要求"
+  q83:
+    type: "XO"
+    description: "是否对承包商施工方案进行了审查？"
+  q84:
+    type: "PJ"
+    description: "组织是否定期检查承包商项目执行情况？"
+  q85:
+    type: "PJ"
+    description: "组织是否及时沟通检查结果，保证项目顺利实施？"
+  q86:
+    type: "PJ"
+    description: "组织是否建立了承包商过程质量控制要求，并按照节点进行现场确认？"
+  q87:
+    type: "PW"
+    description: "组织是否规定不同类别的承包商管理要求(如涉及)？"
+    sub_questions:
+      - "工程服务类"
+      - "物资类"
+  q88:
+    type: "PJ"
+    description: "组织是否将承包商移交的完工报告、项目相关资料信息纳人本单位资产信息管理范畴？"
+  q89:
+    type: "XO"
+    description: "组织是否跟踪、记录承包商合同执行情况？"
+  q90:
+    type: "PW"
+    description: "组织是否定期开展承包商业绩与资质评估工作，包括："
+    sub_questions:
+      - "承包商所做项目的完成程度"
+      - "符合公司体系、法律法规要求的能力"
+      - "合同条款的遵守情况"
+  q91:
+    type: "PJ"
+    description: "组织是否对承包商业绩与资质评估工作进行总结？"
+  q92:
+    type: "PW"
+    description: "是否建立资产事故管理程序，包括："
+    sub_questions:
+      - "事故分级分类标准"
+      - "事故报告"
+      - "事故调查"
+      - "责任认定"
+      - "统计分析"
+      - "经验教训学习"
+  q93:
+    type: "PW"
+    description: "是否资产事故按要求上报？"
+    sub_questions:
+      - "按事故管理程序要求报告资产事故(口头或邮件等)"
+      - "特大事故24h内以电话或邮件方式上报企业"
+      - "按事故管理程序要求上报资产事故初步报告"
+  q94:
+    type: "PW"
+    description: "是否组织资产事故调查？"
+    sub_questions:
+      - "依据资产事故级别和性质成立调查组"
+      - "明确事故调查人员及其职责"
+      - "按时完成事故调查报告"
+  q95:
+    type: "PW"
+    description: "事故调查报告是否包含以下内容："
+    sub_questions:
+      - "事故发生单位概况"
+      - "现场环境及作业情况"
+      - "事故经过及应急处置情况"
+      - "资产的损毁情况"
+      - "资产损坏情况及发生原因(直接原因和间接原因)和事故性质"
+      - "事件(事故)防范和整改措施"
+      - "相关附件(包括图表、照片、技术鉴定等资料)"
+  q96:
+    type: "XO"
+    description: "是否在资产事故发生后，制定并实施临时消减措施？"
+  q97:
+    type: "XO"
+    description: "对资产事故进行跟踪和记录，直至完成整改措施关闭为止。"
+  q98:
+    type: "PW"
+    description: "是否收集资产事故有关资料和记录，形成资产事故档案？"
+    sub_questions:
+      - "事故分析会议记录"
+      - "事故调查报告"
+      - "技术鉴定和试验报告和物证.人证材料"
+      - "直接和间接经济损失材料"
+      - "事故人员自述材料"
+      - "发生事故时工艺条件、操作情况和设计资料"
+      - "处分决定和受处分人员的检查资料"
+      - "事故的通报、简报及文件"
+      - "参加调查组的人员名单、职务、单位、专业特长"
+  q99:
+    type: "XO"
+    description: "是否每年统计分析本单位资产事故情况，查找问题的原因并制定相应的改进措施？"
+  q100:
+    type: "PJ"
+    description: "建立资产事故沟通和分享机制，让员工和承包商及时学习和汲取内外部事故经验教训，防范类似事故再次发生。"
+
+绩效评价:
+  q1:
+    type: "PW"
+    description: "是否建立资产监视测量要求，包括："
+    sub_questions:
+      - "资产绩效监视测量"
+      - "资产管理绩效监视测量"
+      - "资产完整性管理体系绩效监视测量"
+  q2:
+    type: "XO"
+    description: "是否定期进行资产检查？"
+  q3:
+    type: "PJ"
+    description: "是否对年度关键绩效指标完成情况定期进行跟踪？"
+  q4:
+    type: "XO"
+    description: "是否对年度关键绩效指标进行考核？"
+  q5:
+    type: "PJ"
+    description: "是否对考核结果进行分析与评价？"
+  q6:
+    type: "XO"
+    description: "是否组织评选设备管理先进单位和个人？"
+  q7:
+    type: "XO"
+    description: "是否建立资产完整性管理内部审核程序？"
+  q8:
+    type: "XO"
+    description: "是否定期实施资产完整性管理内部审核？"
+  q9:
+    type: "PW"
+    description: "审核时是否明确："
+    sub_questions:
+      - "审核目的"
+      - "审核范围"
+      - "审核准则"
+  q10:
+    type: "PJ"
+    description: "审核员是否具备相应的能力？"
+  q11:
+    type: "XO"
+    description: "审核时是否制订审核计划？"
+  q12:
+    type: "XO"
+    description: "是否出具审核报告？"
+  q13:
+    type: "XO"
+    description: "审核结果是否向相关管理层和人员汇报、传达？"
+  q14:
+    type: "XO"
+    description: "审核后的整改是否建立跟踪机制？"
+  q15:
+    type: "PW"
+    description: "审核后的整改是否："
+    sub_questions:
+      - "按计划整改完成"
+      - "对本次审核后的不符合进行分析"
+  q16:
+    type: "XO"
+    description: "是否开展资产管理体系外部审核(需要时)？"
+  q17:
+    type: "XO"
+    description: "是否建立资产管理评审程序？"
+  q18:
+    type: "XO"
+    description: "是否定期实施资产管理评审？"
+  q19:
+    type: "PW"
+    description: "管理评审是否包括："
+    sub_questions:
+      - "资产完整性管理体系运行情况"
+      - "目标完成情况"
+      - "绩效监测结果"
+      - "内外部审核结果"
+      - "纠正措施完成情况"
+      - "相关内外部环境变化情况"
+  q20:
+    type: "PW"
+    description: "管理评审的输出是否包括："
+    sub_questions:
+      - "与体系相关的变更"
+      - "目标与工作计划的制订与实施"
+      - "持续改进有关的决策"
+      - "落实资产风险管理的决策"
+  q21:
+    type: "PJ"
+    description: "管理评审的输出是否传达到资产相关岗位人员？"
+  q22:
+    type: "XO"
+    description: "管理评审结果是否纳人本单位完整性管理年度报告？"
+
+改进:
+  q1:
+    type: "PW"
+    description: "是否建立了改进管理要求，并涵盖："
+    sub_questions:
+      - "不符合、纠正措施"
+      - "预防措施"
+      - "持续改进"
+  q2:
+    type: "PW"
+    description: "是否采取相应的方式发现不符合？"
+    sub_questions:
+      - "合规评价"
+      - "隐患排查"
+      - "巡检"
+      - "资产检查"
+  q3:
+    type: "PJ"
+    description: "发现不符合是否立即整改，不能立即整改的是否制订方案，规定整改时间及责任人？"
+  q4:
+    type: "PJ"
+    description: "是否跟踪落实整改情况，并满足规定的时间和要求？"
+  q5:
+    type: "PJ"
+    description: "是否定期统计分析不符合发生的原因，视情况采取预防措施？"
+  q6:
+    type: "PW"
+    description: "是否应用、总结和分享良好作业实践或新技术新方法的应用？"
+    sub_questions:
+      - "新技术、新方法"
+      - "本单位良好作业实践总结"
+      - "应用行业内的良好作业实践并总结" 
