@@ -204,8 +204,19 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
             return None
             
         # 使用系统字体
-        pdfmetrics.registerFont(TTFont('SimSun', 'C:/Windows/Fonts/simsun.ttc'))
-        pdfmetrics.registerFont(TTFont('SimHei', 'C:/Windows/Fonts/simhei.ttf'))
+        font_dir = Path(__file__).parent / "fonts"
+        simsun_path = font_dir / "simsun.ttc"
+        simhei_path = font_dir / "simhei.ttf"
+
+        try:
+            pdfmetrics.registerFont(TTFont('SimSun', str(simsun_path)))
+            pdfmetrics.registerFont(TTFont('SimHei', str(simhei_path)))
+            main_font = 'SimSun'
+            bold_font = 'SimHei'
+        except Exception as e:
+            # 字体注册失败，降级为系统默认字体
+            main_font = 'Helvetica'
+            bold_font = 'Helvetica-Bold'
         
         # 创建PDF文档
         buffer = io.BytesIO()
@@ -220,7 +231,7 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
         title_style = ParagraphStyle(
             'CustomTitle',
             parent=styles['Heading1'],
-            fontName='SimHei',
+            fontName=bold_font,
             fontSize=28,
             spaceAfter=30,
             alignment=1,
@@ -230,7 +241,7 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
         heading2_style = ParagraphStyle(
             'CustomHeading2',
             parent=styles['Heading2'],
-            fontName='SimHei',
+            fontName=bold_font,
             fontSize=20,
             spaceAfter=15,
             textColor=colors.HexColor('#2874A6')
@@ -239,7 +250,7 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
         heading3_style = ParagraphStyle(
             'CustomHeading3',
             parent=styles['Heading3'],
-            fontName='SimHei',
+            fontName=bold_font,
             fontSize=16,
             spaceAfter=12,
             textColor=colors.HexColor('#3498DB')
@@ -248,7 +259,7 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
         normal_style = ParagraphStyle(
             'CustomNormal',
             parent=styles['Normal'],
-            fontName='SimSun',
+            fontName=main_font,
             fontSize=12,
             spaceAfter=8,
             leading=16,
