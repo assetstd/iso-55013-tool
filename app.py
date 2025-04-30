@@ -11,7 +11,7 @@ import traceback
 from contextlib import contextmanager
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, KeepTogether, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
@@ -192,24 +192,48 @@ def load_audit_questions():
         logging.error(traceback.format_exc())
         raise
 
+# 加载分值权重配置
+def load_score_weights():
+    with open('score_weights.yaml', 'r', encoding='utf-8') as f:
+        return yaml.safe_load(f)
+
+score_weights_config = load_score_weights()
+
 # 计算合规分数
-def calculate_compliance_score(responses, question_type, sub_responses=None):
+def calculate_compliance_score(responses, question_type, sub_responses=None, score_weight=1):
     """计算合规分数"""
     try:
-        if not responses:
-            return 0
-        
-        if question_type == "XO":
-            return 100 if responses == 4 else 0
-        elif question_type == "PW":
+        if question_type == "PW":
             if not sub_responses:
                 return 0
-            sub_scores = [calculate_compliance_score(r, "XO") for r in sub_responses.values()]
-            return sum(sub_scores) / len(sub_scores) if sub_scores else 0
-        else:  # PJ类型
-            return (responses / 4) * 100
+            # 直接用True/False算平均
+            sub_scores = [100 if v else 0 for v in sub_responses.values()]
+            base_score = sum(sub_scores) / len(sub_scores) if sub_scores else 0
+        else:
+            if not responses:
+                return 0
+            type_base = score_weights_config['question_type_base_scores']
+            if question_type == "XO":
+                base_score = type_base['XO'].get("yes" if responses == 4 else "no", 0)
+            else:  # PJ类型
+                base_score = type_base['PJ'].get(responses, 0)
+        weighted_score = (base_score / 100) * score_weight
+        return weighted_score
     except Exception as e:
         logging.error(f"计算合规分数失败: {str(e)}")
+        logging.error(traceback.format_exc())
+        return 0
+
+# 计算总分（1000分制）
+def calculate_total_score(section_scores):
+    """计算1000分制总分"""
+    try:
+        if not section_scores:
+            return 0
+        # 直接返回所有章节得分之和
+        return sum(section_scores.values())
+    except Exception as e:
+        logging.error(f"计算总分失败: {str(e)}")
         logging.error(traceback.format_exc())
         return 0
 
@@ -219,7 +243,7 @@ def create_radar_chart(section_scores):
     try:
         if not section_scores:
             return None
-            
+        section_weights = score_weights_config['section_weights']
         # 获取章节名称和分数
         categories = []
         values = []
@@ -234,8 +258,10 @@ def create_radar_chart(section_scores):
                 'improvements': '改进'
             }.get(section, section)
             categories.append(section_name)
-            values.append(score)
-        
+            max_score = section_weights.get(section, 100)
+            # 满分显示100，否则按百分比
+            value = 100 if abs(score - max_score) < 1e-6 else (score / max_score * 100 if max_score else 0)
+            values.append(value)
         fig = go.Figure()
         fig.add_trace(go.Scatterpolar(
             r=values,
@@ -244,7 +270,6 @@ def create_radar_chart(section_scores):
             name='Compliance Score' if st.session_state.language == 'en' else '合规分数',
             line_color='#4CAF50'
         ))
-        
         fig.update_layout(
             polar=dict(
                 radialaxis=dict(
@@ -343,53 +368,42 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
         
         # 添加标题
         title = "ISO 55001 Audit Report" if st.session_state.language == 'en' else "ISO 55001 审核报告"
-        elements.append(Paragraph(title, title_style))
-        
-        generation_time = "Generation Time: " if st.session_state.language == 'en' else "生成时间："
-        elements.append(Paragraph(f"{generation_time}{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", normal_style))
-        elements.append(Spacer(1, 30))
-        
-        # 添加总体得分
-        total_score = sum(section_scores.values()) / len(section_scores) if section_scores else 0
+        # 组合第一页内容
+        first_page_content = []
+        first_page_content.append(Paragraph(title, title_style))
+        # 总体评分
+        total_score = sum(section_scores.values()) if section_scores else 0
         score_style = ParagraphStyle(
             'ScoreStyle',
             parent=heading2_style,
             fontSize=24,
             textColor=colors.HexColor('#27AE60')
         )
-        
-        overall_score = "Overall Compliance Score: " if st.session_state.language == 'en' else "总体合规分数："
-        elements.append(Paragraph(f"{overall_score}{total_score:.1f}%", score_style))
-        elements.append(Spacer(1, 30))
-        
-        # 添加雷达图
+        overall_score = "Overall Score: " if st.session_state.language == 'en' else "总体评分："
+        first_page_content.append(Paragraph(f"{overall_score}{total_score:.1f}", score_style))
+        first_page_content.append(Spacer(1, 10))
+        # 雷达图
         radar_chart = create_radar_chart(section_scores)
         if radar_chart:
             try:
                 img_data = radar_chart.to_image(format="png")
-                img = Image(io.BytesIO(img_data), width=6*inch, height=4*inch)
-                elements.append(img)
-                elements.append(Spacer(1, 30))
+                img = Image(io.BytesIO(img_data), width=6.8*inch, height=5.0*inch)  # 宽高
+                first_page_content.append(img)
+                first_page_content.append(Spacer(1, 10))
             except Exception as e:
                 logging.error(f"添加雷达图到PDF失败: {str(e)}")
-        
-        # 添加各要素得分
-        elements.append(Paragraph(
+        # 各要素得分详情表格
+        first_page_content.append(Paragraph(
             "Element Scores Detail" if st.session_state.language == 'en' else "各要素得分详情",
             heading2_style
         ))
-        elements.append(Spacer(1, 15))
-        
-        # 创建得分表格
+        first_page_content.append(Spacer(1, 5))
         headers = ['Element', 'Score'] if st.session_state.language == 'en' else ['要素', '得分']
         data = [headers]
         for section, score in section_scores.items():
-            section_id = audit_questions[section].get('id', section)
-            data.append([section_id, f"{score:.1f}%"])
-        
-        # 计算表格宽度
+            section_id = audit_questions[section]['name']['zh'] if st.session_state.language == 'zh' else audit_questions[section].get('id', section)
+            data.append([section_id, f"{score:.1f}"])
         col_widths = [doc.width/2.0, doc.width/2.0]
-        
         table = Table(data, colWidths=col_widths)
         table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#2E4053')),
@@ -397,7 +411,7 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('FONTNAME', (0, 0), (-1, 0), bold_font),
             ('FONTSIZE', (0, 0), (-1, 0), 14),
-            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
             ('BACKGROUND', (0, 1), (-1, -1), colors.HexColor('#F8F9F9')),
             ('TEXTCOLOR', (0, 1), (-1, -1), colors.black),
             ('FONTNAME', (0, 1), (-1, -1), main_font),
@@ -405,13 +419,15 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
             ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
             ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#D5D8DC')),
             ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#F8F9F9')]),
-            ('LEFTPADDING', (0, 0), (-1, -1), 12),
-            ('RIGHTPADDING', (0, 0), (-1, -1), 12),
-            ('TOPPADDING', (0, 0), (-1, -1), 8),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
+            ('LEFTPADDING', (0, 0), (-1, -1), 8),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 8),
+            ('TOPPADDING', (0, 0), (-1, -1), 5),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
         ]))
-        elements.append(table)
-        elements.append(Spacer(1, 30))
+        first_page_content.append(table)
+        first_page_content.append(Spacer(1, 10))
+        elements.append(KeepTogether(first_page_content))
+        elements.append(PageBreak())
         
         # 添加详细评估结果
         elements.append(Paragraph(
@@ -438,13 +454,13 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
         }
         
         for section, section_data in audit_questions.items():
-            section_id = section_data.get('id', section)
+            section_id = section_data['name']['zh'] if st.session_state.language == 'zh' else section_data.get('id', section)
             elements.append(Paragraph(section_id, heading3_style))
             
             for q_id, question in section_data.get('questions', {}).items():
                 key = f"{section}_{q_id}"
                 score = responses.get(key, 0)
-                
+                question_weight = score_weights_config['question_weights'][section].get(q_id, 1)
                 # 创建问题样式
                 question_style = ParagraphStyle(
                     'QuestionStyle',
@@ -467,24 +483,32 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
                 question_text = "Question: " if st.session_state.language == 'en' else "问题："
                 type_text = "Type: " if st.session_state.language == 'en' else "类型："
                 score_text = "Score: " if st.session_state.language == 'en' else "得分："
+                weight_text = "Weight: " if st.session_state.language == 'en' else "分值权重："
                 
                 description = get_translated_text(question["description"], st.session_state.language)
                 elements.append(Paragraph(f"{question_text}{description}", question_style))
                 elements.append(Paragraph(f"{type_text}{question['type']}", normal_style))
                 elements.append(Paragraph(f"{score_text}{score}", score_style))
+                elements.append(Paragraph(f"{weight_text}{question_weight}", normal_style))
                 
                 # 如果是多选题，添加子问题得分
                 if question['type'] == "PW" and "sub_questions" in question:
                     sub_questions = question["sub_questions"].get(st.session_state.language, [])
                     sub_scores_text = "Sub-question scores: " if st.session_state.language == 'en' else "子问题得分："
                     elements.append(Paragraph(sub_scores_text, normal_style))
-                    
+                    sub_count = len(sub_questions)
+                    question_weight = score_weights_config['question_weights'][section].get(q_id, 1)
                     for i, sub_q in enumerate(sub_questions, 1):
                         sub_key = f"{key}_sub_{i}"
-                        sub_score = sub_responses.get(sub_key, 0)
+                        sub_score = st.session_state.sub_responses.get(sub_key, False)
                         yes_text = "Yes" if st.session_state.language == 'en' else "是"
                         no_text = "No" if st.session_state.language == 'en' else "否"
-                        elements.append(Paragraph(f"- {sub_q}: {yes_text if sub_score == 4 else no_text}", normal_style))
+                        # 子问题得分为题目权重/子项数
+                        sub_score_value = question_weight / sub_count if sub_score else 0
+                        if st.session_state.language == 'en':
+                            elements.append(Paragraph(f"- {sub_q}: {yes_text if sub_score else no_text} ({sub_score_value:.1f})", normal_style))
+                        else:
+                            elements.append(Paragraph(f"- {sub_q}: {yes_text if sub_score else no_text}（{sub_score_value:.1f}）", normal_style))
                 
                 elements.append(Spacer(1, 15))
         
@@ -666,32 +690,37 @@ def main():
                                             4: "Fully Implemented"
                                         }
                                     }
+                                    # 修正index越界问题
+                                    index = 0
+                                    try:
+                                        index = int(current_value)
+                                        if index not in [0, 1, 2, 3, 4]:
+                                            index = 0
+                                    except Exception:
+                                        index = 0
                                     st.session_state.responses[key] = st.selectbox(
                                         "Score" if st.session_state.language == 'en' else "评分",
                                         options=[0, 1, 2, 3, 4],
                                         format_func=lambda x: score_labels[st.session_state.language][x],
                                         key=f"select_{section}_{q_id}",
                                         label_visibility="collapsed",
-                                        index=int(current_value)  # 确保 index 是整数
+                                        index=index  # 保证index合法
                                     )
                                 else:  # PW类型
                                     # 多选题使用复选框
                                     if "sub_questions" in question:
-                                        sub_scores = []
                                         sub_questions = question.get('sub_questions', {}).get(st.session_state.language, [])
                                         for i, sub_q in enumerate(sub_questions, 1):
                                             sub_key = f"{key}_sub_{i}"
                                             if sub_key not in st.session_state.sub_responses:
                                                 st.session_state.sub_responses[sub_key] = False
-                                            current_value = st.session_state.sub_responses.get(sub_key, False)
                                             checked = st.checkbox(
                                                 sub_q,
-                                                value=current_value,
+                                                value=st.session_state.sub_responses.get(sub_key, False),
                                                 key=f"checkbox_{section}_{q_id}_{i}_sub"
                                             )
                                             st.session_state.sub_responses[sub_key] = checked
-                                            sub_scores.append(4 if checked else 0)
-                                        st.session_state.responses[key] = sum(sub_scores) / len(sub_scores) if sub_scores else 0
+                                        # 不再赋值st.session_state.responses[key]
                 
                 # 自动保存功能
                 current_time = datetime.now()
@@ -723,24 +752,34 @@ def main():
                     questions = audit_questions[section].get('questions', {})
                     for q_id, question in questions.items():
                         key = f"{section}_{q_id}"
-                        if key in section_responses:
+                        if question["type"] == "PW":
+                            sub_keys = [k for k in section_sub_responses if k.startswith(key)]
+                            sub_count = len(sub_keys)
+                            weight = score_weights_config['question_weights'][section].get(q_id, 1)
+                            selected_count = sum(1 for k in sub_keys if section_sub_responses[k])
+                            score = (weight / sub_count) * selected_count if sub_count else 0
+                        elif key in section_responses:
                             score = calculate_compliance_score(
                                 section_responses[key],
                                 question["type"],
-                                {k: v for k, v in section_sub_responses.items() if k.startswith(key)}
+                                None,
+                                score_weight=score_weights_config['question_weights'][section].get(q_id, 1)
                             )
-                            question_scores.append(score)
+                        else:
+                            score = 0
+                        question_scores.append(score)
                     
-                    # 计算要素平均分
-                    section_scores[section] = sum(question_scores) / len(question_scores) if question_scores else 0
+                    # 计算要素总分（由平均分改为总和）
+                    section_scores[section] = sum(question_scores) if question_scores else 0
                 
                 # 显示总体合规分数
                 col1, col2, col3 = st.columns([1, 2, 1])
                 with col2:
-                    total_score = sum(section_scores.values()) / len(section_scores) if section_scores else 0
+                    # 只显示1000分制得分
+                    total_score = calculate_total_score(section_scores)
                     st.metric(
-                        "Audit Quantitative Score" if st.session_state.language == 'en' else "审核量化打分",
-                        f"{total_score:.1f}%"
+                        "总体评分" if st.session_state.language == 'zh' else "Overall Score",
+                        f"{total_score:.1f}/1000"
                     )
                 
                 # 显示雷达图
@@ -749,15 +788,13 @@ def main():
                     st.plotly_chart(radar_chart, use_container_width=True)
                 else:
                     st.warning("Cannot generate radar chart" if st.session_state.language == 'en' else "无法生成雷达图")
-                
-                # 显示详细得分
+                # 显示详细得分（去除百分比进度条，仅保留分数）
                 st.subheader("Element Scores" if st.session_state.language == 'en' else "要素得分")
                 cols = st.columns(3)
                 for i, (section, score) in enumerate(section_scores.items()):
                     with cols[i % 3]:
                         section_name = audit_questions[section]['name'][st.session_state.language]
-                        st.metric(section_name, f"{score:.1f}%")
-                        st.progress(score / 100)
+                        st.metric(section_name, f"{score:.1f}")
             
             except Exception as e:
                 st.error(f"渲染结果分析页面时出错: {str(e)}")
@@ -816,6 +853,7 @@ def main():
                                         "score": score,
                                         "assessment": score_labels[st.session_state.language][round(score)] if question["type"] != "XO" else 
                                                     ("Yes" if score == 4 else "No" if st.session_state.language == 'en' else "是" if score == 4 else "否"),
+                                        "weight": score_weights_config['question_weights'][section].get(q_id, 1),
                                         "sub_scores": sub_scores if sub_scores else None
                                     })
                             
@@ -832,7 +870,7 @@ def main():
                                     # 创建雷达图数据工作表
                                     radar_data = pd.DataFrame({
                                         'Element' if st.session_state.language == 'en' else '要素': list(section_scores.keys()),
-                                        'Score' if st.session_state.language == 'en' else '得分': list(section_scores.values())
+                                        'Score' if st.session_state.language == 'en' else '得分': [f"{v:.1f}" for v in section_scores.values()]
                                     })
                                     radar_sheet_name = 'Radar Chart Data' if st.session_state.language == 'en' else '雷达图数据'
                                     radar_data.to_excel(writer, index=False, sheet_name=radar_sheet_name)
