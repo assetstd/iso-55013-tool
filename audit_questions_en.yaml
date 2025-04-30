@@ -1,0 +1,984 @@
+organization_context:
+  q1:
+    type: "XO"
+    description: "Is an organisational structure for asset management in place?"
+  q2:
+    type: "XO"
+    description: "Is there an asset management department?"
+  q3:
+    type: "XO"
+    description: "Is there a dedicated position for asset management?"
+  q4:
+    type: "PW"
+    description: "Are the management responsibilities of the management at different stages of the life cycle of the equipment and facilities clarified?"
+    sub_questions:
+      - "Planning investments"
+      - "Engineering and construction"
+      - "Operations and Maintenance"
+      - "Decommissioning disposal"
+  q5:
+    type: "PJ"
+    description: "Are the job responsibilities of management at different stages of the full life cycle of the equipment and facilities clarified?"
+
+leadership:
+  q1:
+    type: "XO"
+    description: "Is there a clear line manager for organisational asset management?"
+  q2:
+    type: "PJ"
+    description: "Is there a clear idea of asset management in the unit?"
+  q3:
+    type: "PJ"
+    description: "Do you follow asset management developments and have a clear plan for asset management work in the current year and actively promote it?"
+  q4:
+    type: "PW"
+    description: "Is the establishment of a sound asset management system actively promoted?"
+    sub_questions:
+      - "Participation in system building"
+      - "Understanding the content of system documentation"
+      - "Promoting the implementation of the system"
+  q5:
+    type: "PW"
+    description: "Is a compliance risk identification mechanism and a risk management mechanism organised?"
+    sub_questions:
+      - "Compliance Risk Identification Mechanism"
+      - "Risk management mechanisms"
+  q6:
+    type: "XO"
+    description: "Is there an inspection of how asset management is carried out in the unit?"
+  q7:
+    type: "PJ"
+    description: "Is there an understanding of the weaknesses in asset management in the organisation?"
+  q8:
+    type: "PW"
+    description: "Is communication with interested parties organised on a regular basis to listen to their views and suggestions?"
+    sub_questions:
+      - "Government authorities"
+      - "Shareholders and employees"
+      - "Customer."
+      - "Community and non-community organisations"
+      - "Contractor"
+  q9:
+    type: "XO"
+    description: "Is there an organisation to summarise and share experiences and lessons learned from asset management incidents?"
+  q10:
+    type: "XO"
+    description: "Is an asset management review organised?"
+  q11:
+    type: "PW"
+    description: "Are asset management objectives organised?"
+    sub_questions:
+      - "Medium and long-term objectives"
+      - "Annual targets"
+  q12:
+    type: "PW"
+    description: "Is the development of an asset management work plan organised?"
+    sub_questions:
+      - "Medium- and long-term programme of work"
+      - "Annual programme of work"
+  q13:
+    type: "XO"
+    description: "Is there an organisation to summarise and share experiences and lessons learned from equipment and facility accidents?"
+  q14:
+    type: "XO"
+    description: "Is an asset management review organised?"
+  q15:
+    type: "PJ"
+    description: "Is there an understanding of the asset management approach?"
+  q16:
+    type: "XO"
+    description: "Is there an asset management policy for the unit?"
+  q17:
+    type: "PW"
+    description: "Does the asset management approach developed cover the following:"
+    sub_questions:
+      - "Full life cycle"
+      - "Risk-based"
+      - "Operate in Compliance"
+      - "Continuous Improvement"
+      - "Economically reliable"
+
+planning:
+  q1:
+    type: "XO"
+    description: "Are medium- and long-term management objectives and plans for asset management in place?"
+  q2:
+    type: "PW"
+    description: "Asset management medium- and long-term management objectives and plans are met."
+    sub_questions:
+      - "Equipment renewal and replacement programme"
+      - "Pre-technical stockpiling for planning projects"
+      - "Application of new technologies, equipment and methods"
+      - "Integrity management-related programmes"
+      - "Analysis and outlook of relevant international and domestic requirements and technological developments"
+  q3:
+    type: "XO"
+    description: "Are medium- and long-term goals and programmes regularly evaluated and revised when needed?"
+  q4:
+    type: "XO"
+    description: "Are annual targets for asset management set?"
+  q5:
+    type: "PW"
+    description: "Are annual asset management targets met:"
+    sub_questions:
+      - "Alignment with medium and long-term goals and plans"
+      - "Includes managerial, technical and economic aspects"
+  q6:
+    type: "PW"
+    description: "Are annual asset management targets met:"
+    sub_questions:
+      - "Specific, measurable, attainable, desirable and time-bound"
+      - "Passed through official channels to the appropriate unit or department"
+  q7:
+    type: "XO"
+    description: "Are asset management key performance indicators established?"
+  q8:
+    type: "XO"
+    description: "Are asset management objectives and KPIs communicated to relevant departments?"
+  q9:
+    type: "XO"
+    description: "Does it report on the achievement of the previous year's objectives and plans, and submit an annual report on integrity management work to the parent unit?"
+  q10:
+    type: "XO"
+    description: "Is an annual workplan for asset management developed based on annual targets?"
+  q11:
+    type: "PW"
+    description: "Is the asset management workplan clear:"
+    sub_questions:
+      - "Responsible person"
+      - "Content of work"
+      - "Cost budget"
+      - "Date of commencement and completion"
+  q12:
+    type: "PW"
+    description: "Does the work content of the annual work plan include:"
+    sub_questions:
+      - "Risk management"
+      - "Identification of Laws, Regulations and Related Requirements and Compliance Evaluation"
+      - "People team building"
+      - "Renewal of assets"
+      - "Asset inspection and maintenance"
+      - "Inspection and testing programme"
+      - "Asset inspection"
+      - "Audit."
+      - "Management Review"
+  q13:
+    type: "XO"
+    description: "Is the implementation of the plan tracked and accounted for?"
+  q14:
+    type: "XO"
+    description: "Change, update annual plan when significant changes occur?"
+  q15:
+    type: "XO"
+    description: "Are management requirements for identification and evaluation of laws, regulations, and related requirements established?"
+  q16:
+    type: "PW"
+    description: "Identify whether asset facility laws and regulations and related requirements include:"
+    sub_questions:
+      - "Relevant international conventions, agreements (if relevant)"
+      - "Asset-related laws and regulations"
+      - "Asset-related mandatory standard codes"
+      - "Selected Recommended Standard Specifications"
+      - "Required by the parent company"
+  q17:
+    type: "PW"
+    description: "Is a list of laws and regulations and related requirements applicable to the asset established?"
+    sub_questions:
+      - "Name of laws, regulations and related requirements"
+      - "Laws, regulations and related requirements number"
+      - "Applicable Provisions of Laws, Regulations and Related Requirements"
+      - "Date of entry into force of laws, regulations and related requirements"
+  q18:
+    type: "PW"
+    description: "Are applicable laws and regulations and related requirements identified and regularly updated?"
+    sub_questions:
+      - "Regularly identify the applicable legal regulations and related requirements."
+      - "Update identified laws and regulations and related requirements"
+  q19:
+    type: "PJ"
+    description: "Is there a periodic evaluation of compliance with laws, regulations and related requirements regarding company assets?"
+  q20:
+    type: "PJ"
+    description: "Are corrective and preventive measures taken and follow-up verified for non-compliance with laws and regulations and related requirements?"
+  q21:
+    type: "XO"
+    description: "Are laws and regulations and related requirements communicated to the relevant post holders?"
+  q22:
+    type: "PW"
+    description: "Are asset risk management requirements established?"
+    sub_questions:
+      - "Risk acceptance guidelines"
+      - "Risk assessment"
+      - "Risk response"
+      - "Dynamic risk management"
+  q23:
+    type: "PW"
+    description: "Have guidelines for risk acceptance been developed for uniform application, taking into account the following:"
+    sub_questions:
+      - "Nature and types of possible consequences and ways of measuring them"
+      - "Measures of Likelihood"
+      - "Time limits for possibilities and consequences"
+      - "Methodology for determining the risk level"
+      - "Acceptable or tolerable level or grade of risk"
+      - "Consider the impact of combinations of multiple risks"
+      - "Whether guidelines for risk acceptability are agreed upon company-wide through formal channels"
+  q24:
+    type: "PW"
+    description: "Are risk assessments conducted for the full life cycle of the asset?"
+    sub_questions:
+      - "Risk Identification"
+      - "Risk analysis"
+      - "Risk evaluation"
+  q25:
+    type: "PW"
+    description: "Whether a specialised risk assessment is performed on assets selecting targeted risk assessment techniques, including:"
+    sub_questions:
+      - "Risk-based test (where applicable)"
+      - "Reliability-centred maintenance (where applicable)"
+      - "Failure mode and effects analysis (where applicable)"
+      - "Hazard and operability analyses (where applicable)"
+      - "Security integrity level assessment (where applicable)"
+      - "Quantitative risk analysis (where applicable)"
+      - "Reliability, availability and maintainability analyses (where applicable)"
+  q26:
+    type: "PJ"
+    description: "Does the risk assessment cover all assets?"
+  q27:
+    type: "XO"
+    description: "Are the results of the risk assessment summarised statistically?"
+  q28:
+    type: "PW"
+    description: "Is there a risk response for high risks?"
+    sub_questions:
+      - "Development of response measures"
+      - "Develop a risk response plan (resource requirements, responsible persons, completion time, etc.)"
+      - "Implementation of response plans and tracking and validation"
+  q29:
+    type: "PW"
+    description: "Is there a risk response to medium risk?"
+    sub_questions:
+      - "Development of response measures, assessment of measures based on ALARP principles"
+      - "Develop a risk response plan (who is responsible for resource requirements, completion time, etc.)"
+      - "Implementation of response plans and tracking and validation"
+  q30:
+    type: "PW"
+    description: "Has a residual risk assessment been carried out to determine that the risk has been reduced to an acceptable level?"
+    sub_questions:
+      - "Are high and medium risks reduced to an acceptable level"
+      - "Whether the disposition of the risk is operational and effective"
+  q31:
+    type: "XO"
+    description: "Are high and medium risks monitored and inspected?"
+  q32:
+    type: "XO"
+    description: "Is information about the risk of the asset's high school communicated to those in risk-related positions?"
+  q33:
+    type: "PW"
+    description: "Is there a dynamic assessment of asset risk, including:"
+    sub_questions:
+      - "When there are changes in laws and regulations regarding assets and related requirements"
+      - "Upon change of assets"
+      - "When the environment in which the asset operates changes"
+      - "When a legacy of risk identification is found."
+      - "After the asset has been overhauled"
+      - "Asset reactivation"
+      - "In the event of an accident"
+      - "When new processes, techniques, materials and equipment are used."
+  q34:
+    type: "XO"
+    description: "Is the risk list updated after the risk reassessment?"
+
+support:
+  q1:
+    type: "PW"
+    description: "Has an asset management team been established, including:"
+    sub_questions:
+      - "Managers"
+      - "Technicians"
+      - "Operator"
+  q2:
+    type: "PJ"
+    description: "Is there an appropriate job promotion mechanism for asset management-related personnel?"
+  q3:
+    type: "PJ"
+    description: "Is there a pool of asset management experts?"
+  q4:
+    type: "PW"
+    description: "Do asset management related positions have the qualifications, experience and competencies required by the state and company?"
+    sub_questions:
+      - "Managers"
+      - "Technicians"
+      - "Operator"
+  q5:
+    type: "PJ"
+    description: "Are the competencies of personnel related to asset management assessed and analysed and articulated with training needs?"
+  q6:
+    type: "PW"
+    description: "Is there a training programme related to asset management, including:"
+    sub_questions:
+      - "Management training"
+      - "Technical training"
+      - "Operational type training"
+  q7:
+    type: "PJ"
+    description: "Is it implemented in accordance with the asset training plan?"
+  q8:
+    type: "XO"
+    description: "Does training ensure that post holders understand and have knowledge of asset management requirements?"
+  q9:
+    type: "XO"
+    description: "Are there regular asset management exchanges?"
+  q10:
+    type: "XO"
+    description: "Does the organisation have an information feedback mechanism in place?"
+  q11:
+    type: "PJ"
+    description: "Does the organisation collect comments and suggestions related to the operation and maintenance phase of the asset in a timely manner to feed back into the planning and investment and construction phases of subsequent projects?"
+  q12:
+    type: "PJ"
+    description: "Does the organisation organise regular communication meetings with relevant parties to receive their suggestions and views on asset management?"
+  q13:
+    type: "PW"
+    description: "Does the organisation collect and capture a wide range of advanced asset management knowledge, including but not limited to the following:"
+    sub_questions:
+      - "Asset management standards at home and abroad"
+      - "Proven management experience"
+      - "Scientific and technological achievements"
+      - "Good practice"
+      - "New technologies"
+      - "New Processes"
+      - "New Materials"
+  q14:
+    type: "PJ"
+    description: "Does the organisation exchange and share information on the advanced management knowledge of assets collected and acquired?"
+  q15:
+    type: "XO"
+    description: "Does the organisation have an asset information management process in place?"
+  q16:
+    type: "PW"
+    description: "Has the organisation established an asset management ledger, including:"
+    sub_questions:
+      - "Asset number, bit number"
+      - "Name"
+      - "Specifications, technical parameters"
+      - "Status."
+      - "Manufacturer."
+      - "Date of commissioning"
+  q17:
+    type: "PW"
+    description: "Does the organisation have an asset management file?"
+    sub_questions:
+      - "Factory documentation"
+      - "Inspection and Maintenance Operating Procedures"
+      - "Inspection and maintenance records"
+      - "Accident records"
+      - "Failure log"
+      - "Updating the Record of Conversion"
+  q18:
+    type: "PW"
+    description: "Does the organisation identify, capture, process, statistically and analytically analyse information in the process of managing the full life cycle of assets, which should include the following three aspects:"
+    sub_questions:
+      - "Static data"
+      - "Dynamic data"
+      - "Analysing assessment data"
+  q19:
+    type: "XO"
+    description: "Does the organisation include asset data integrity as part of the acceptance of the completion of construction projects?"
+  q20:
+    type: "PW"
+    description: "Does the organisation establish documented information management requirements and include the following:"
+    sub_questions:
+      - "Classification of documented information"
+      - "Rules for numbering system documents"
+      - "Issuance and maintenance of system documentation (if relevant)"
+  q21:
+    type: "PJ"
+    description: "Is the organisation's document management standardised?"
+  q22:
+    type: "PW"
+    description: "Does the organisation have an asset management information system in place that includes the following:"
+    sub_questions:
+      - "Management (with associated functionality)"
+      - "Technology (with relevant functionality)"
+      - "Economy (with relevant functions)"
+      - "Full life-cycle management (with associated functionality)"
+  q23:
+    type: "PJ"
+    description: "Is the Asset Management Information System entry data complete?"
+  q24:
+    type: "PJ"
+    description: "Are asset-related data entered in the Asset Management Information System accurate?"
+  q25:
+    type: "PJ"
+    description: "Is the Asset Management Information System (AMIS) data entry timely?"
+  q26:
+    type: "PJ"
+    description: "How well is the Asset Management Information System (AMIS) being used and how well is it working?"
+  q27:
+    type: "PJ"
+    description: "Are requirements for reviewing data and information in the asset information system established and are data and information reviews conducted on a regular basis?"
+  q28:
+    type: "PJ"
+    description: "Does the organisation's asset management information system consider compatibility and interfacing up and down to keep the asset management information delivery channels open for information sharing?"
+  q29:
+    type: "XO"
+    description: "Does the organisation conduct regular appraisals of information systems?"
+
+operation:
+  q1:
+    type: "PW"
+    description: "Does the organisation pay attention at the investment planning stage to:"
+    sub_questions:
+      - "Fundamentals of Design"
+      - "Primary Asset Selection"
+      - "Main process flow"
+      - "Risk assessment"
+      - "Engineering programme for critical assets"
+  q2:
+    type: "PW"
+    description: "Does the organisation take into account lessons learned from the construction and O&M phases of previous projects during the investment phase of project planning?"
+    sub_questions:
+      - "Researching projects of the same type."
+      - "Collect and summarise information on projects of the same type"
+  q3:
+    type: "PJ"
+    description: "Does the organisation identify factors affecting assets at the planning investment stage and propose countermeasures?"
+  q4:
+    type: "PJ"
+    description: "Has the organisation analysed the relevant requirements affecting the whole life cost of assets during the feasibility study process and optimised the analysis of the whole life cost of assets with reference to previous lessons learned?"
+  q5:
+    type: "PJ"
+    description: "Has the organisation carried out an analysis of the strategy for asset operability, maintainability and reliability to be achieved in this phase of the programme?"
+  q6:
+    type: "PW"
+    description: "Does the organisation set out requirements or recommendations at the planning investment stage for asset management at subsequent stages, including:"
+    sub_questions:
+      - "Engineering and construction phase"
+      - "Operation and maintenance phase"
+      - "Decommissioning disposal phase"
+  q7:
+    type: "PW"
+    description: "Did the asset authority send managers to participate in the review of the following nodes:"
+    sub_questions:
+      - "Feasibility study phase review"
+      - "FID Phase Review"
+  q8:
+    type: "PW"
+    description: "Did the project construction authority send managers to participate in the review of the following nodes:"
+    sub_questions:
+      - "Feasibility study phase review"
+      - "FID Final Decision Stage Review"
+  q9:
+    type: "PJ"
+    description: "Does the organisation specify the competency requirements for those involved in reviewing assets at the planning investment stage?"
+  q10:
+    type: "PJ"
+    description: "Has the organisation clarified the requirements for the content of managers' critical node reviews?"
+  q11:
+    type: "XO"
+    description: "Does the organisation identify departmental functions involved in asset management during the construction phase of the project?"
+  q12:
+    type: "XO"
+    description: "Has the organisation defined the responsibilities of those involved in asset management positions during the construction phase of the project?"
+  q13:
+    type: "PJ"
+    description: "Does the organisation identify asset management requirements for the construction phase of the project in procedure documents or related requirements?"
+  q14:
+    type: "PW"
+    description: "Were the following requirements established during the construction phase of the project, including:"
+    sub_questions:
+      - "Quality management requirements"
+      - "Security management requirements"
+      - "Progress management requirements"
+      - "Cost management requirements"
+  q15:
+    type: "PJ"
+    description: "Does the organisation specify the requirements for confirming the conformity of the technical parameters of the engineering design programme with the preliminary design?"
+  q16:
+    type: "XO"
+    description: "Does the organisation carry out the identification of critical assets during the construction phase of the project?"
+  q17:
+    type: "XO"
+    description: "Has the organisation carried out a risk assessment exercise for assets during the construction phase of the project?"
+  q18:
+    type: "PJ"
+    description: "Has the organisation refined and implemented the asset management requirements set out in the feasibility study and FID phase?"
+  q19:
+    type: "PW"
+    description: "Does the organisation set out asset integrity management requirements and safeguards for subsequent phases during the construction phase of the project, including:"
+    sub_questions:
+      - "Operation and maintenance phase"
+      - "Decommissioning disposal phase"
+  q20:
+    type: "PJ"
+    description: "Has the organisation analysed the full life cycle costs during the technical selection process of equipment and at the procurement stage, with a comprehensive judgement of the technical and economic aspects of the asset?"
+  q21:
+    type: "PW"
+    description: "Did the asset authority carry out the following during the construction phase of the project:"
+    sub_questions:
+      - "Clarifies the requirements for the content of the review of key nodes."
+      - "Asset managers were sent to participate in the review of key points in the construction phase of the project."
+      - "Asset-related observations or recommendations were made"
+  q22:
+    type: "PJ"
+    description: "Prior to the handover of the project, were issues relating to assets that may have been left over from the construction phase of the project inspected, and were the identified issues rectified and closed in a timely manner?"
+  q23:
+    type: "XO"
+    description: "Does the organisation have an asset management system in place?"
+  q24:
+    type: "XO"
+    description: "Does the asset management system clarify the scope of application?"
+  q25:
+    type: "PW"
+    description: "Does the asset management system meet the following requirements:"
+    sub_questions:
+      - "The system is refined from the top down, level by level."
+      - "Risk-based"
+      - "Covering the full life cycle"
+      - "A PDCA cycle is formed."
+  q26:
+    type: "PJ"
+    description: "Does the asset management system have requirements for interfacing the phases?"
+  q27:
+    type: "PJ"
+    description: "Is the asset management system operational?"
+  q28:
+    type: "PJ"
+    description: "Has the organisation established a risk-based inspection and maintenance strategy?"
+  q29:
+    type: "PW"
+    description: "Does the organisation systematically plan inspection and maintenance activities for critical assets on site, including:"
+    sub_questions:
+      - "Medium and long-term inspection and maintenance plans/rolling plans are in place (where relevant)."
+      - "An annual inspection and maintenance programme is in place."
+      - "A monthly inspection and maintenance programme was developed."
+  q30:
+    type: "PW"
+    description: "Has the organisation developed the following protocols or operating instructions for the asset, including:"
+    sub_questions:
+      - "Use of maintenance and repair protocols or operating instructions"
+      - "Overhaul protocols or operating instructions"
+  q31:
+    type: "XO"
+    description: "Has the organisation established asset classification guidelines?"
+  q32:
+    type: "PW"
+    description: "Has the organisation established an equipment classification ledger and is it classified according to the classification guidelines as:"
+    sub_questions:
+      - "Key assets (level A)"
+      - "Significant assets (level B)"
+      - "General assets (level C)"
+  q33:
+    type: "PJ"
+    description: "Does the organisation specify requirements for updating the asset hierarchy ledger and regularly identify updates?"
+  q34:
+    type: "PW"
+    description: "Does the organisation have targeted management policies in place and enforced for different levels of equipment, including:"
+    sub_questions:
+      - "Overhaul programme management"
+      - "Inspection and maintenance protocols"
+      - "Fault management and fault database"
+      - "Accident and emergency management"
+      - "Condition monitoring"
+      - "Asset evaluation"
+      - "Overhaul management"
+      - "Spare parts"
+  q35:
+    type: "XO"
+    description: "Has the organisation established asset corrosion management requirements that take into account its own business characteristics?"
+  q36:
+    type: "PJ"
+    description: "Has the organisation developed and carried out asset corrosion monitoring and testing to analyse and optimise asset corrosion management requirements, taking into account equipment type?"
+  q37:
+    type: "XO"
+    description: "Has the organisation established equipment lubrication management requirements, including such things as the five definitions and three filters, taking into account the characteristics of its own business?"
+  q38:
+    type: "PJ"
+    description: "Does the organisation carry out and keep records of equipment lubrication in accordance with equipment lubrication requirements?"
+  q39:
+    type: "XO"
+    description: "Has the organisation established management requirements for monitoring the condition of assets, taking into account its own business characteristics?"
+  q40:
+    type: "PJ"
+    description: "Has the organisation implemented the condition monitoring requirements in accordance with the condition monitoring requirements, and has regular analysis work been carried out on the condition monitoring data to optimise the monitoring of asset management requirements?"
+  q41:
+    type: "PJ"
+    description: "Has the organisation established asset inspection and testing requirements that take into account the characteristics of its business, and are the inspection and testing requirements complete?"
+  q42:
+    type: "XO"
+    description: "Does the organisation carry out the relevant work in accordance with the inspection and testing requirements and establish an asset inspection and testing checklist to track the status of asset inspection and testing?"
+  q43:
+    type: "PW"
+    description: "Does the organisation manage and maintain records of the entire process of the asset renewal and improvement project, including:"
+    sub_questions:
+      - "Selection"
+      - "Acquisition"
+      - "Installation"
+      - "Acceptance"
+      - "Post-evaluation"
+  q44:
+    type: "PJ"
+    description: "Has the organization conducted a full life-cycle cost and economic analysis and evaluation of large assets to provide a basis for decision-making on the development and implementation of asset efficiency improvement programmes?"
+  q45:
+    type: "PJ"
+    description: "Does the organisation have economic indicators for its assets, which are regularly statistically analysed, and are there any improvements as a result of the statistical analysis?"
+  q46:
+    type: "PJ"
+    description: "Does the organisation's asset maintenance strategy take into account economy, including the identification of economic maintenance methods, and economic maintenance intervals?"
+  q47:
+    type: "XO"
+    description: "Does the organisation perform asset condition management?"
+  q48:
+    type: "PJ"
+    description: "Has the organisation achieved dynamic management of comprehensive information on assets with the help of information systems?"
+  q49:
+    type: "PW"
+    description: "Does the organisation specify the requirements for the decommissioning and disposal of assets, including:"
+    sub_questions:
+      - "Conditions of decommissioning and disposal"
+      - "Decommissioning Disposal Process"
+      - "Data analysis and preservation"
+  q50:
+    type: "PJ"
+    description: "Has the organisation carried out the decommissioning disposal of assets in accordance with the relevant requirements?"
+  q51:
+    type: "PW"
+    description: "Prior to the decommissioning disposal decision, were assets analysed, including:"
+    sub_questions:
+      - "Technical analyses"
+      - "Economic analysis"
+  q52:
+    type: "PW"
+    description: "Prior to the decommissioning of the asset, were the following tasks performed:"
+    sub_questions:
+      - "A decommissioning risk assessment was conducted."
+      - "The condition of the assets was analysed and justified."
+  q53:
+    type: "PW"
+    description: "Prior to the decommissioning of the asset, were the following tasks performed:"
+    sub_questions:
+      - "The impact on production and operation after disposal has been analysed and demonstrated."
+      - "Disposal methods were analysed and justified."
+  q54:
+    type: "PJ"
+    description: "Is the decommissioning disposal process reasonably compliant?"
+  q55:
+    type: "XO"
+    description: "Does the organisation have an asset change management process in place?"
+  q56:
+    type: "XO"
+    description: "Does the organisation define the scope of asset change management?"
+  q57:
+    type: "XO"
+    description: "Does the organisation specify the requirements for change classification and grading?"
+  q58:
+    type: "XO"
+    description: "Does the organisation specify triggers for change?"
+  q59:
+    type: "XO"
+    description: "Does the organisation set out requirements for risk assessment and corresponding countermeasures to be taken prior to change?"
+  q60:
+    type: "XO"
+    description: "Does the organisation specify a change approval process?"
+  q61:
+    type: "XO"
+    description: "Does the organisation specify requirements for the management of change files?"
+  q62:
+    type: "XO"
+    description: "Does the organisation specify requirements for change-related training?"
+  q63:
+    type: "PW"
+    description: "Does the organisational change content description include the following:"
+    sub_questions:
+      - "Brief reasons for change"
+      - "Change project description"
+      - "Risk assessment"
+      - "Overview of workload"
+      - "Completion time"
+      - "Changed implementation procedures or specific programmes"
+  q64:
+    type: "XO"
+    description: "Does the change request meet the change trigger conditions?"
+  q65:
+    type: "PJ"
+    description: "Are risk responses implemented?"
+  q66:
+    type: "XO"
+    description: "Is the organisation's asset change hierarchy implemented as required?"
+  q67:
+    type: "XO"
+    description: "Has the change in classification of organisational assets been implemented as required?"
+  q68:
+    type: "XO"
+    description: "Does the organisation have a designated Requirements Change Owner responsible for change process management?"
+  q69:
+    type: "XO"
+    description: "Is the organisation's change request approved before the change can be implemented?"
+  q70:
+    type: "PJ"
+    description: "Does the organisation track and supervise the management of changes during the change process to ensure that all changes are effectively controlled?"
+  q71:
+    type: "XO"
+    description: "When a temporary change of organisation exceeds the prescribed period, is the change procedure re-executed?"
+  q72:
+    type: "XO"
+    description: "Has the organisation organised change acceptance and created an acceptance record?"
+  q73:
+    type: "XO"
+    description: "Does the organisation keep all drawings and documents subject to change up to date and in a timely manner?"
+  q74:
+    type: "XO"
+    description: "Does the organisation provide training to relevant personnel?"
+  q75:
+    type: "PJ"
+    description: "Does the organisation evaluate and track the change effects of major changes?"
+  q76:
+    type: "XO"
+    description: "Does the organisation form change lists?"
+  q77:
+    type: "XO"
+    description: "Has the organisation established systems and requirements for asset contractors?"
+  q78:
+    type: "PW"
+    description: "Does the organisation specify the contractor's qualification and competence requirements in the technical requirements and include the following:"
+    sub_questions:
+      - "Corresponding qualification requirements"
+      - "Personnel capacity requirements"
+  q79:
+    type: "PW"
+    description: "When the organisation enters into a contract with a contractor for a different service model, the contract should include the following key elements:"
+    sub_questions:
+      - "Duties to be performed by the Parties"
+      - "respective rights"
+      - "respective obligations to be fulfilled"
+      - "Possible consequences of non-compliance"
+  q80:
+    type: "XO"
+    description: "Does the organisation review the vocational qualifications, special operator certificates, etc. of contractor personnel before the contractor enters the site?"
+  q81:
+    type: "XO"
+    description: "Did the contractor conduct a technical briefing prior to the operation?"
+  q82:
+    type: "PW"
+    description: "Does the organisation require and monitor contractors' compliance with the unit's management system requirements?"
+    sub_questions:
+      - "Whether the contractor is required to follow the unit's management system requirements"
+      - "Whether the contractor is monitored for compliance with the unit's management system requirements."
+  q83:
+    type: "XO"
+    description: "Has the contractor's construction programme been reviewed?"
+  q84:
+    type: "PJ"
+    description: "Does the organisation conduct regular inspections of the contractor's project performance?"
+  q85:
+    type: "PJ"
+    description: "Does the organisation communicate the results of inspections in a timely manner to ensure the smooth implementation of the project?"
+  q86:
+    type: "PJ"
+    description: "Has the organisation established contractor process quality control requirements and confirmed them on-site by node?"
+  q87:
+    type: "PW"
+    description: "Does the organisation specify requirements for the management of different categories of contractors (if involved)?"
+    sub_questions:
+      - "Engineering services category"
+      - "Material class"
+  q88:
+    type: "PJ"
+    description: "Does the organisation include information on completion reports and project-related data transferred by contractors in its asset information management?"
+  q89:
+    type: "XO"
+    description: "Does the organisation track and record contractor contract performance?"
+  q90:
+    type: "PW"
+    description: "Does the organisation conduct regular contractor performance and qualification assessment exercises, including:"
+    sub_questions:
+      - "Degree of completion of projects undertaken by contractors"
+      - "Ability to meet the requirements of company systems, laws and regulations"
+      - "Compliance with the terms of the contract"
+  q91:
+    type: "PJ"
+    description: "Does the organisation summarise the contractor performance and qualification assessment exercise?"
+  q92:
+    type: "PW"
+    description: "Are asset incident management procedures in place, including:"
+    sub_questions:
+      - "Criteria for the classification of accidents"
+      - "Accident report"
+      - "Accident Investigation"
+      - "Determination of responsibility"
+      - "Statistical analyses"
+      - "Lessons Learned"
+  q93:
+    type: "PW"
+    description: "Are asset incidents reported as required?"
+    sub_questions:
+      - "Report asset incidents as required by the incident management process (verbally or by mail, etc.)"
+      - "Extraordinary accidents are reported to the company by phone or email within 24h"
+      - "Initial reports of asset incidents are reported as required by the incident management process"
+  q94:
+    type: "PW"
+    description: "Is an asset accident investigation organised?"
+    sub_questions:
+      - "Establishment of an investigation team based on the level and nature of the asset incident."
+      - "Clarify accident investigators and their duties"
+      - "Completion of accident investigation reports on time"
+  q95:
+    type: "PW"
+    description: "Does the accident investigation report contain the following:"
+    sub_questions:
+      - "Overview of the unit where the accident occurred"
+      - "Site environment and operations"
+      - "Accident history and emergency response"
+      - "Destruction of assets"
+      - "Damage to assets and the reasons for it (direct and indirect) and the nature of the incident"
+      - "Incident (accident) prevention and corrective measures"
+      - "Relevant annexes (including information such as diagrams, photographs, technical identification, etc.)"
+  q96:
+    type: "XO"
+    description: "Are temporary abatement measures developed and implemented after an asset incident?"
+  q97:
+    type: "XO"
+    description: "Asset incidents are tracked and documented until corrective action closure is completed."
+  q98:
+    type: "PW"
+    description: "Is information and records related to asset incidents collected to form an asset incident file?"
+    sub_questions:
+      - "Proceedings of the Accident Analysis Meeting"
+      - "Accident Investigation Report"
+      - "Technical identification and test reports and physical evidence ... Human witness materials"
+      - "Direct and indirect economic loss material"
+      - "Accident victim self-reporting material"
+      - "Process conditions, operation and design information at the time of the accident"
+      - "Decision on disciplinary action and information on the examination of the person subjected to disciplinary action"
+      - "Circulars, briefings and documents on accidents"
+      - "List of persons who participated in the investigation team, their positions, units and professional specialities."
+  q99:
+    type: "XO"
+    description: "Is there an annual statistical analysis of accidents in the unit's assets to identify the causes of the problems and develop appropriate improvement measures?"
+  q100:
+    type: "PJ"
+    description: "Establish an asset incident communication and sharing mechanism to allow employees and contractors to learn and draw lessons from internal and external incidents in a timely manner to prevent the recurrence of similar incidents."
+
+performance_evaluation:
+  q1:
+    type: "PW"
+    description: "Are asset monitoring measurement requirements established, including:"
+    sub_questions:
+      - "Asset Performance Monitoring Measurement"
+      - "Asset Management Performance Monitoring Measurement"
+      - "Asset Integrity Management System Performance Monitoring Measurement"
+  q2:
+    type: "XO"
+    description: "Are asset inspections conducted regularly?"
+  q3:
+    type: "PJ"
+    description: "Is there regular tracking of the achievement of annual key performance indicators?"
+  q4:
+    type: "XO"
+    description: "Are annual KPIs appraised?"
+  q5:
+    type: "PJ"
+    description: "Are appraisal results analysed and evaluated?"
+  q6:
+    type: "XO"
+    description: "Does it organise the selection of advanced units and individuals in equipment management?"
+  q7:
+    type: "XO"
+    description: "Is there an internal review process in place for asset integrity management?"
+  q8:
+    type: "XO"
+    description: "Are internal audits of asset integrity management implemented on a regular basis?"
+  q9:
+    type: "PW"
+    description: "Is it clear at the time of the audit:"
+    sub_questions:
+      - "Purpose of the audit"
+      - "Scope of review"
+      - "Audit Guidelines"
+  q10:
+    type: "PJ"
+    description: "Does the auditor have the appropriate competences?"
+  q11:
+    type: "XO"
+    description: "Is there an audit plan in place at the time of the audit?"
+  q12:
+    type: "XO"
+    description: "Is an audit report issued?"
+  q13:
+    type: "XO"
+    description: "Are the results of audits reported and communicated to relevant management and personnel?"
+  q14:
+    type: "XO"
+    description: "Is there a tracking mechanism for post-audit corrections?"
+  q15:
+    type: "PW"
+    description: "Is the rectification after the audit:"
+    sub_questions:
+      - "Rectification completed as planned"
+      - "Analyse the non-conformities following this audit."
+  q16:
+    type: "XO"
+    description: "Is an external audit of the asset management system conducted (when required)?"
+  q17:
+    type: "XO"
+    description: "Is an asset management review process in place?"
+  q18:
+    type: "XO"
+    description: "Are asset management reviews implemented regularly?"
+  q19:
+    type: "PW"
+    description: "Does the management review include:"
+    sub_questions:
+      - "Operation of the asset integrity management system"
+      - "Completion of objectives"
+      - "Performance monitoring results"
+      - "Results of internal and external audits"
+      - "Completion of corrective measures"
+      - "Changes in the relevant internal and external environment"
+  q20:
+    type: "PW"
+    description: "Does the output of the management review include:"
+    sub_questions:
+      - "System-related changes"
+      - "Formulation and implementation of objectives and work programmes"
+      - "Continuous improvement of relevant decision-making"
+      - "Implementing decision-making for asset risk management"
+  q21:
+    type: "PJ"
+    description: "Is the output of the management review communicated to those in asset-related positions?"
+  q22:
+    type: "XO"
+    description: "Are the results of management reviews included in the unit's integrity management annual report?"
+
+improvements:
+  q1:
+    type: "PW"
+    description: "Are improvement management requirements established and cover:"
+    sub_questions:
+      - "Non-conformities, corrective measures"
+      - "Preventive measures"
+      - "Continuous Improvement"
+  q2:
+    type: "PW"
+    description: "Is there a corresponding way to detect non-conformity?"
+    sub_questions:
+      - "Compliance evaluation"
+      - "Hidden Troubleshooting"
+      - "Inspections."
+      - "Asset inspection"
+  q3:
+    type: "PJ"
+    description: "Are non-conformities found to be rectified immediately, and where they cannot be rectified immediately, is a programme drawn up, with a time frame for rectification and the person responsible for it?"
+  q4:
+    type: "PJ"
+    description: "Are corrective actions followed up and do they fulfil the time and requirements set out?"
+  q5:
+    type: "PJ"
+    description: "Are    the causes of non-conformities statistically analysed on a regular basis and preventive measures taken as appropriate?"
+  q6:
+    type: "PW"
+    description: "Does it apply, summarise and share good operational practice or the application of new technologies and methods?"
+    sub_questions:
+      - "New technologies, new approaches"
+      - "Summary of good operating practices in the unit"
+      - "Apply and summarise good operating practices in the industry"

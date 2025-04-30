@@ -77,4 +77,101 @@ h1, h2, h3 {
     margin-left: 1rem;
     padding-left: 1rem;
     border-left: 1px solid #dee2e6;
+}
+
+/* 调整整体页面缩放 */
+.stApp {
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+/* 调整侧边栏宽度和内容 */
+.css-1d391kg {
+    width: 18rem;
+}
+
+/* 调整标题大小 */
+.css-10trblm {
+    font-size: 1.5rem;
+}
+
+/* 调整按钮大小 */
+.stButton button {
+    font-size: 0.85rem;
+    padding: 0.3rem 1rem;
+}
+
+/* 调整指标显示大小 */
+.css-1xarl3l {
+    font-size: 1.2rem;
+}
+
+/* 调整问题类型标签样式 */
+.question-type {
+    font-size: 0.75rem;
+    padding: 0.1rem 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.question-type-pj {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.question-type-xo {
+    background-color: #f1f8e9;
+    color: #689f38;
+}
+
+.question-type-pw {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+/* 调整问题描述文本大小 */
+.element-container {
+    font-size: 0.9rem;
+}
+
+/* 调整选择框和单选框大小 */
+.stSelectbox, .stRadio {
+    font-size: 0.85rem;
+}
+
+/* 调整进度条大小 */
+.stProgress {
+    height: 0.5rem;
+}
+
+/* 调整分隔线样式 */
+hr {
+    margin: 0.5rem 0;
+}
+
+/* 调整展开框标题大小 */
+.streamlit-expanderHeader {
+    font-size: 1rem;
+}
+
+/* 调整表格文字大小 */
+.dataframe {
+    font-size: 0.85rem;
+}
+
+/* 调整警告和错误消息大小 */
+.stAlert {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+}
+
+/* 调整markdown文本大小 */
+.markdown-text-container {
+    font-size: 0.9rem;
+}
+
+/* 调整子标题大小 */
+h4 {
+    font-size: 1.1rem !important;
 } 
