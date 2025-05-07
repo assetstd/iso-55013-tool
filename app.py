@@ -367,7 +367,7 @@ def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
         elements = []
         
         # 添加标题
-        title = "ISO 55001 Assessment Report" if st.session_state.language == 'en' else "ISO 55001 评估报告"
+        title = "ISO 55013 Assessment Report" if st.session_state.language == 'en' else "ISO 55013 评估报告"
         # 组合第一页内容
         first_page_content = []
         first_page_content.append(Paragraph(title, title_style))
@@ -526,7 +526,7 @@ init_db()
 
 # 设置页面配置
 st.set_page_config(
-    page_title="ISO 55001 评估工具",
+    page_title="ISO 55013 评估工具",
     page_icon=None,
     layout="wide",
     initial_sidebar_state="expanded"
@@ -579,7 +579,7 @@ def main():
                     st.rerun()
             
             # 添加标题
-            st.title("ISO 55001 Assessment Toolkit" if st.session_state.language == 'en' else "ISO 55001 评估工具")
+            st.title("ISO 55013 Assessment Toolkit" if st.session_state.language == 'en' else "ISO 55013 评估工具")
             
             st.markdown("---")
             
@@ -860,7 +860,7 @@ def main():
                             # 创建DataFrame并导出为Excel
                             df = pd.DataFrame(report_data)
                             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                            filename = f"ISO55001_{'Assessment_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.xlsx"
+                            filename = f"ISO55013_{'Assessment_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.xlsx"
                             
                             try:
                                 with pd.ExcelWriter(filename, engine='openpyxl') as writer:
@@ -900,7 +900,7 @@ def main():
                             pdf_buffer = create_pdf_report(section_scores, questionnaire, st.session_state.responses, st.session_state.sub_responses)
                             if pdf_buffer:
                                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                                filename = f"ISO55001_{'Assessment_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.pdf"
+                                filename = f"ISO55013_{'Assessment_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.pdf"
                                 download_label = "Download PDF Report" if st.session_state.language == 'en' else "下载PDF报告"
                                 st.download_button(
                                     label=download_label,

@@ -1,9 +1,9 @@
-# ISO 55001 评估工具 / ISO 55001 Assessment Toolkit
+# ISO 55013 评估工具 / ISO 55013 Assessment Toolkit
 
 ## 项目简介 / Project Introduction
-项目是基于Streamlit运行的ISO 55001资产管理体系评估工具，支持中英文双语，灵活的分值权重配置，自动生成PDF/Excel报告，适用于企业自评或第三方评估。
+项目是基于Streamlit运行的ISO 55013资产管理体系评估工具，支持中英文双语，灵活的分值权重配置，自动生成PDF/Excel报告，适用于企业自评或第三方评估。
 
-This project is a Streamlit-based ISO 55001 asset management assessment toolkit, supporting both Chinese and English, flexible score weighting configuration, and automatic PDF/Excel report generation. Suitable for enterprise self-assessment or third-party assessment.
+This project is a Streamlit-based ISO 55013 asset management assessment toolkit, supporting both Chinese and English, flexible score weighting configuration, and automatic PDF/Excel report generation. Suitable for enterprise self-assessment or third-party assessment.
 
 ## 主要功能 / Main Features
 - 评估问卷支持PJ/XO/PW三种题型
@@ -41,7 +41,7 @@ streamlit run app.py
 ## 联系方式 / Contact
 如有问题或建议，请联系：
 - 邮箱: iso55000@163.com
-- Issues: https://github.com/yourrepo/iso-55001-tool/issues
+- Issues: https://github.com/yourrepo/iso-55013-tool/issues
 
 ## 系统要求
 
@@ -52,8 +52,8 @@ streamlit run app.py
 
 1. 克隆仓库：
 ```bash
-git clone https://github.com/yourusername/iso-55001-tool.git
-cd iso-55001-tool
+git clone https://github.com/yourusername/iso-55013-tool.git
+cd iso-55013-tool
 ```
 
 2. 安装依赖：
