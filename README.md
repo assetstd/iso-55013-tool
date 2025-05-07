@@ -1,12 +1,12 @@
-# ISO 55001 审核工具 / ISO 55001 Audit Tool
+# ISO 55001 评估工具 / ISO 55001 Assessment Toolkit
 
 ## 项目简介 / Project Introduction
-本项目是基于Streamlit的ISO 55001资产管理体系审核问卷工具，支持中英文双语，灵活的分值权重配置，自动生成PDF/Excel报告，适用于企业自评或第三方审核。
+项目是基于Streamlit运行的ISO 55001资产管理体系评估工具，支持中英文双语，灵活的分值权重配置，自动生成PDF/Excel报告，适用于企业自评或第三方评估。
 
-This project is a Streamlit-based ISO 55001 asset management audit questionnaire tool, supporting both Chinese and English, flexible score weighting configuration, and automatic PDF/Excel report generation. Suitable for enterprise self-assessment or third-party audit.
+This project is a Streamlit-based ISO 55001 asset management assessment toolkit, supporting both Chinese and English, flexible score weighting configuration, and automatic PDF/Excel report generation. Suitable for enterprise self-assessment or third-party assessment.
 
 ## 主要功能 / Main Features
-- 审核问卷支持PJ/XO/PW三种题型
+- 评估问卷支持PJ/XO/PW三种题型
 - 分值权重灵活配置，1000分总分制
 - 中英文双语切换，界面与报告均支持
 - 自动生成美观的PDF/Excel报告，含雷达图
@@ -40,7 +40,7 @@ streamlit run app.py
 
 ## 联系方式 / Contact
 如有问题或建议，请联系：
-- 邮箱: your_email@example.com
+- 邮箱: iso55000@163.com
 - Issues: https://github.com/yourrepo/iso-55001-tool/issues
 
 ## 系统要求
@@ -70,10 +70,10 @@ streamlit run app.py
 
 1. 启动应用后，在浏览器中打开显示的地址
 2. 选择界面语言（中文/English）
-3. 按章节回答审核问题
+3. 按章节回答评估问题
 4. 使用顶部的保存按钮保存进度
 5. 在"结果分析"标签页查看评分情况
-6. 在"报告导出"标签页生成审核报告
+6. 在"报告导出"标签页生成评估报告
 
 ## 问题类型说明
 

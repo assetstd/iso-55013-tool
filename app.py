@@ -34,7 +34,7 @@ logging.basicConfig(
 def get_db_connection():
     conn = None
     try:
-        conn = sqlite3.connect('audit_data.db')
+        conn = sqlite3.connect('assessment_data.db')
         yield conn
     except Exception as e:
         logging.error(f"数据库连接错误: {str(e)}")
@@ -51,7 +51,7 @@ def init_db():
         with get_db_connection() as conn:
             c = conn.cursor()
             c.execute('''
-                CREATE TABLE IF NOT EXISTS audit_results (
+                CREATE TABLE IF NOT EXISTS assessment_results (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     timestamp TEXT,
                     responses TEXT,
@@ -66,13 +66,13 @@ def init_db():
         raise
 
 # 保存评估结果
-def save_audit_results(responses, sub_responses):
+def save_assessment_results(responses, sub_responses):
     """保存评估结果"""
     try:
         with get_db_connection() as conn:
             c = conn.cursor()
             c.execute('''
-                INSERT INTO audit_results (timestamp, responses, sub_responses)
+                INSERT INTO assessment_results (timestamp, responses, sub_responses)
                 VALUES (?, ?, ?)
             ''', (datetime.now().isoformat(), 
                   json.dumps(responses), 
@@ -85,14 +85,14 @@ def save_audit_results(responses, sub_responses):
         raise
 
 # 加载最近的评估结果
-def load_latest_audit_results():
+def load_latest_assessment_results():
     """加载最近的评估结果"""
     try:
         with get_db_connection() as conn:
             c = conn.cursor()
             c.execute('''
                 SELECT responses, sub_responses 
-                FROM audit_results 
+                FROM assessment_results 
                 ORDER BY timestamp DESC 
                 LIMIT 1
             ''')
@@ -121,15 +121,15 @@ def init_session_state():
         st.session_state.language = 'zh'  # 默认中文
 
 # 加载评估问题
-def load_audit_questions():
+def load_questionnaire():
     """加载问题"""
     try:
         # 加载中文问题
-        with open('audit_questions.yaml', 'r', encoding='utf-8') as file:
+        with open('questionnaire.yaml', 'r', encoding='utf-8') as file:
             questions_zh = yaml.safe_load(file)
         
         # 加载英文问题
-        with open('audit_questions_en.yaml', 'r', encoding='utf-8') as file:
+        with open('questionnaire_en.yaml', 'r', encoding='utf-8') as file:
             questions_en = yaml.safe_load(file)
         
         logging.info("成功加载问题")
@@ -295,10 +295,10 @@ def create_radar_chart(section_scores):
         logging.error(traceback.format_exc())
         return None
 
-def create_pdf_report(section_scores, audit_questions, responses, sub_responses):
+def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
     """生成PDF报告"""
     try:
-        if not section_scores or not audit_questions:
+        if not section_scores or not questionnaire:
             logging.error("生成PDF报告失败：缺少必要数据")
             return None
             
@@ -367,7 +367,7 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
         elements = []
         
         # 添加标题
-        title = "ISO 55001 Audit Report" if st.session_state.language == 'en' else "ISO 55001 评估报告"
+        title = "ISO 55001 Assessment Report" if st.session_state.language == 'en' else "ISO 55001 评估报告"
         # 组合第一页内容
         first_page_content = []
         first_page_content.append(Paragraph(title, title_style))
@@ -401,7 +401,7 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
         headers = ['Element', 'Score'] if st.session_state.language == 'en' else ['要素', '得分']
         data = [headers]
         for section, score in section_scores.items():
-            section_id = audit_questions[section]['name']['zh'] if st.session_state.language == 'zh' else audit_questions[section].get('id', section)
+            section_id = questionnaire[section]['name']['zh'] if st.session_state.language == 'zh' else questionnaire[section].get('id', section)
             data.append([section_id, f"{score:.1f}"])
         col_widths = [doc.width/2.0, doc.width/2.0]
         table = Table(data, colWidths=col_widths)
@@ -453,7 +453,7 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
             }
         }
         
-        for section, section_data in audit_questions.items():
+        for section, section_data in questionnaire.items():
             section_id = section_data['name']['zh'] if st.session_state.language == 'zh' else section_data.get('id', section)
             elements.append(Paragraph(section_id, heading3_style))
             
@@ -560,7 +560,7 @@ def main():
         
         # 加载评估问题
         try:
-            audit_questions = load_audit_questions()
+            questionnaire = load_questionnaire()
         except Exception as e:
             st.error(f"加载评估问题时出错: {str(e)}")
             return
@@ -589,7 +589,7 @@ def main():
                 save_text = "Save Progress" if st.session_state.language == 'en' else "保存当前进度"
                 if st.button(save_text, key="save_button"):
                     try:
-                        save_audit_results(st.session_state.responses, st.session_state.sub_responses)
+                        save_assessment_results(st.session_state.responses, st.session_state.sub_responses)
                         st.session_state.last_save_time = datetime.now()
                         st.success("Progress saved!" if st.session_state.language == 'en' else "进度已保存！")
                     except Exception as e:
@@ -599,7 +599,7 @@ def main():
                 load_text = "Load Progress" if st.session_state.language == 'en' else "加载上次进度"
                 if st.button(load_text, key="load_button"):
                     try:
-                        responses, sub_responses = load_latest_audit_results()
+                        responses, sub_responses = load_latest_assessment_results()
                         st.session_state.responses = responses
                         st.session_state.sub_responses = sub_responses
                         st.session_state.force_refresh = True
@@ -616,7 +616,7 @@ def main():
             if st.session_state.language == 'en':
                 st.markdown("""
                 #### Question Types
-                - PJ: Subjective Judgement. Questions are scored based on 'professional judgement' and the auditor is required to judge the level of compliance in accordance with the scoring principles. The auditor may give a score from zero to full based on judgement.
+                - PJ: Subjective Judgement. Questions are scored based on 'professional judgement' to judge the level of compliance in accordance with the scoring principles. Give a score from zero to full based on judgement.
                 - XO: Judgemental or not. A question can only be answered with a yes or no answer, with a yes receiving full marks and a no receiving no marks. For any activity to be scored, it should be at least '90 per cent compliant', with 60 per cent of those involved understanding the content and requirements, and with an implementation time of at least three months. Anything else scores zero.
                 - PW: Multiple choice. When the question contains several components, a score is given for each component and the total is the final score. For any activity to be awarded a score, it should be at least '90 per cent compliant', with 60 per cent of the relevant people understanding the content and requirements, and implementation time of at least three months. Anything else will be scored zero.
                 """)
@@ -635,7 +635,7 @@ def main():
         # 评估标签页
         with tabs[0]:
             try:
-                for section, section_data in audit_questions.items():
+                for section, section_data in questionnaire.items():
                     with st.expander(get_section_title(section_data, st.session_state.language), expanded=True):
                         for q_id, question in section_data.get('questions', {}).items():
                             key = f"{section}_{q_id}"
@@ -726,7 +726,7 @@ def main():
                 current_time = datetime.now()
                 if (current_time - st.session_state.last_save_time).total_seconds() > 300:  # 每5分钟自动保存一次
                     try:
-                        save_audit_results(st.session_state.responses, st.session_state.sub_responses)
+                        save_assessment_results(st.session_state.responses, st.session_state.sub_responses)
                         st.session_state.last_save_time = current_time
                         auto_save_text = "Progress auto-saved" if st.session_state.language == 'en' else "进度已自动保存"
                         st.toast(auto_save_text, icon="💾")
@@ -743,13 +743,13 @@ def main():
             try:
                 # 计算各部分得分
                 section_scores = {}
-                for section in audit_questions.keys():
+                for section in questionnaire.keys():
                     section_responses = {k: v for k, v in st.session_state.responses.items() if k.startswith(section)}
                     section_sub_responses = {k: v for k, v in st.session_state.sub_responses.items() if k.startswith(section)}
                     
                     # 计算每个问题的得分
                     question_scores = []
-                    questions = audit_questions[section].get('questions', {})
+                    questions = questionnaire[section].get('questions', {})
                     for q_id, question in questions.items():
                         key = f"{section}_{q_id}"
                         if question["type"] == "PW":
@@ -793,7 +793,7 @@ def main():
                 cols = st.columns(3)
                 for i, (section, score) in enumerate(section_scores.items()):
                     with cols[i % 3]:
-                        section_name = audit_questions[section]['name'][st.session_state.language]
+                        section_name = questionnaire[section]['name'][st.session_state.language]
                         st.metric(section_name, f"{score:.1f}")
             
             except Exception as e:
@@ -811,7 +811,7 @@ def main():
                         with st.spinner("Generating Excel report..." if st.session_state.language == 'en' else "正在生成Excel报告..."):
                             # 创建报告数据
                             report_data = []
-                            for section, section_data in audit_questions.items():
+                            for section, section_data in questionnaire.items():
                                 section_id = section_data.get('id', section)
                                 for q_id, question in section_data.get('questions', {}).items():
                                     key = f"{section}_{q_id}"
@@ -860,11 +860,11 @@ def main():
                             # 创建DataFrame并导出为Excel
                             df = pd.DataFrame(report_data)
                             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                            filename = f"ISO55001_{'Audit_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.xlsx"
+                            filename = f"ISO55001_{'Assessment_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.xlsx"
                             
                             try:
                                 with pd.ExcelWriter(filename, engine='openpyxl') as writer:
-                                    sheet_name = 'Audit Results' if st.session_state.language == 'en' else '评估结果'
+                                    sheet_name = 'Assessment Results' if st.session_state.language == 'en' else '评估结果'
                                     df.to_excel(writer, index=False, sheet_name=sheet_name)
                                     
                                     # 创建雷达图数据工作表
@@ -897,10 +897,10 @@ def main():
                     if st.button(pdf_btn_text, key="generate_pdf_report"):
                         spinner_text = "Generating PDF report..." if st.session_state.language == 'en' else "正在生成PDF报告..."
                         with st.spinner(spinner_text):
-                            pdf_buffer = create_pdf_report(section_scores, audit_questions, st.session_state.responses, st.session_state.sub_responses)
+                            pdf_buffer = create_pdf_report(section_scores, questionnaire, st.session_state.responses, st.session_state.sub_responses)
                             if pdf_buffer:
                                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                                filename = f"ISO55001_{'Audit_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.pdf"
+                                filename = f"ISO55001_{'Assessment_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.pdf"
                                 download_label = "Download PDF Report" if st.session_state.language == 'en' else "下载PDF报告"
                                 st.download_button(
                                     label=download_label,
