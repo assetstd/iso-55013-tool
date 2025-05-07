@@ -8,7 +8,7 @@ section_weights:
   support: 183                   # 支持（19题）
   operation: 47                  # 运行（5题）
   performance_evaluation: 192    # 绩效评价（20题）
-  improvements: 77               # 改进（8题）
+  improvement: 77               # 改进（8题）
 
 # 问题权重配置
 question_weights:
@@ -127,7 +127,7 @@ question_weights:
     q20: 6
 
   # 改进（总分77分，8题）
-  improvements:
+  improvement:
     q1: 10
     q2: 10
     q3: 10

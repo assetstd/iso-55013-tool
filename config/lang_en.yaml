@@ -1,0 +1,49 @@
+app_title: ISO 55013 Assessment Toolkit
+section_scores: Section Scores
+total_score: Total Score
+save_progress: Save Progress
+load_progress: Load Progress
+progress_saved: Progress saved!
+progress_loaded: Last progress loaded!
+report_title: ISO 55013 Assessment Report
+report_generate_time: Generation Time
+radar_chart: Radar Chart
+section_table: Section Scores Table
+assessment_detail: Detailed Assessment Results
+export_pdf: Export PDF Report
+export_excel: Export Excel Report
+zh_button: 中文
+en_button: English
+last_saved: Last saved
+system_assessment: System Assessment
+result_analysis: Result Analysis
+report_export: Report Export
+generate_excel_report: Generate Excel Report
+generating_excel_report: Generating Excel report...
+download_excel_report: Download Excel Report
+excel_report_generated: Excel report generated successfully
+error_generating_excel_report: Error generating Excel report
+radar_chart_data: Radar Chart Data
+assessment_results: Assessment Results
+generate_pdf_report: Generate PDF Report
+generating_pdf_report: Generating PDF report...
+download_pdf_report: Download PDF Report
+pdf_report_generated: PDF report generated successfully
+failed_generating_pdf_report: Failed to generate PDF report
+overall_score: Overall Score
+element_scores: Element Scores
+cannot_generate_radar_chart: Cannot generate radar chart
+score: Score
+question: Question
+type: Type
+weight: Weight
+sub_question_scores: Sub-question scores
+answer_yes: Yes
+answer_no: No
+progress_auto_saved: Progress auto-saved
+last_progress_loaded: Last progress loaded!
+error_saving_progress: Error saving progress
+error_loading_progress: Error loading progress
+element_scores_detail: Element Scores Detail
+detailed_assessment_results: Detailed Assessment Results
+element: Element

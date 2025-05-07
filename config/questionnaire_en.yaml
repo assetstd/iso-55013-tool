@@ -387,7 +387,7 @@ performance_evaluation:
     type: "PJ"
     description: "Does the review identify opportunities for improvement, resource needs, and decisions on necessary system adjustments?"
 
-improvements:
+improvement:
   q1:
     type: "XO"
     description: "Are    the suitability, adequacy, and effectiveness of data assets, management activities, and management systems continuously improved to create data value?"

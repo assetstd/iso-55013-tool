@@ -1,0 +1,6 @@
+report_template_pdf: templates/report_template.pdf
+report_template_excel: templates/report_template.xlsx
+font_zh: SimSun
+font_zh_bold: SimHei
+font_en: Helvetica
+font_en_bold: Helvetica-Bold 

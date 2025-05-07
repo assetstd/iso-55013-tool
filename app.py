@@ -19,6 +19,9 @@ from reportlab.pdfbase.ttfonts import TTFont
 import io
 import base64
 
+# 新增：导入统一配置加载模块
+from config_loader import config
+
 # 配置日志
 logging.basicConfig(
     level=logging.INFO,
@@ -125,11 +128,11 @@ def load_questionnaire():
     """加载问题"""
     try:
         # 加载中文问题
-        with open('questionnaire.yaml', 'r', encoding='utf-8') as file:
+        with open('config/questionnaire.yaml', 'r', encoding='utf-8') as file:
             questions_zh = yaml.safe_load(file)
         
         # 加载英文问题
-        with open('questionnaire_en.yaml', 'r', encoding='utf-8') as file:
+        with open('config/questionnaire_en.yaml', 'r', encoding='utf-8') as file:
             questions_en = yaml.safe_load(file)
         
         logging.info("成功加载问题")
@@ -140,12 +143,12 @@ def load_questionnaire():
         # 创建英文键名到中文键名的映射
         section_mapping = {
             'organization_context': '组织环境',
-            'leadership': '领导力',
+            'leadership': '领导作用',
             'planning': '策划',
             'support': '支持',
             'operation': '运行',
             'performance_evaluation': '绩效评价',
-            'improvements': '改进'
+            'improvement': '改进'
         }
         
         # 遍历英文问题作为基准
@@ -193,11 +196,7 @@ def load_questionnaire():
         raise
 
 # 加载分值权重配置
-def load_score_weights():
-    with open('score_weights.yaml', 'r', encoding='utf-8') as f:
-        return yaml.safe_load(f)
-
-score_weights_config = load_score_weights()
+score_weights_config = config.score_weights
 
 # 计算合规分数
 def calculate_compliance_score(responses, question_type, sub_responses=None, score_weight=1):
@@ -250,12 +249,12 @@ def create_radar_chart(section_scores):
         for section, score in section_scores.items():
             section_name = section.replace('_', ' ').title() if st.session_state.language == 'en' else {
                 'organization_context': '组织环境',
-                'leadership': '领导力',
+                'leadership': '领导作用',
                 'planning': '策划',
                 'support': '支持',
                 'operation': '运行',
                 'performance_evaluation': '绩效评价',
-                'improvements': '改进'
+                'improvement': '改进'
             }.get(section, section)
             categories.append(section_name)
             max_score = section_weights.get(section, 100)
@@ -310,8 +309,8 @@ def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
         try:
             pdfmetrics.registerFont(TTFont('SimSun', str(simsun_path)))
             pdfmetrics.registerFont(TTFont('SimHei', str(simhei_path)))
-            main_font = 'SimSun' if st.session_state.language == 'zh' else 'Helvetica'
-            bold_font = 'SimHei' if st.session_state.language == 'zh' else 'Helvetica-Bold'
+            main_font = config.general['font_zh'] if st.session_state.language == 'zh' else config.general['font_en']
+            bold_font = config.general['font_zh_bold'] if st.session_state.language == 'zh' else config.general['font_en_bold']
         except Exception as e:
             main_font = 'Helvetica'
             bold_font = 'Helvetica-Bold'
@@ -367,7 +366,7 @@ def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
         elements = []
         
         # 添加标题
-        title = "ISO 55013 Assessment Report" if st.session_state.language == 'en' else "ISO 55013 评估报告"
+        title = config.lang_zh['app_title'] if st.session_state.language == 'zh' else config.lang_en['app_title']
         # 组合第一页内容
         first_page_content = []
         first_page_content.append(Paragraph(title, title_style))
@@ -379,7 +378,7 @@ def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
             fontSize=24,
             textColor=colors.HexColor('#27AE60')
         )
-        overall_score = "Overall Score: " if st.session_state.language == 'en' else "总体评分："
+        overall_score = config.lang_zh['overall_score'] if st.session_state.language == 'zh' else config.lang_en['overall_score']
         first_page_content.append(Paragraph(f"{overall_score}{total_score:.1f}", score_style))
         first_page_content.append(Spacer(1, 10))
         # 雷达图
@@ -394,14 +393,14 @@ def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
                 logging.error(f"添加雷达图到PDF失败: {str(e)}")
         # 各要素得分详情表格
         first_page_content.append(Paragraph(
-            "Element Scores Detail" if st.session_state.language == 'en' else "各要素得分详情",
+            config.lang_zh['element_scores_detail'] if st.session_state.language == 'zh' else config.lang_en['element_scores_detail'],
             heading2_style
         ))
         first_page_content.append(Spacer(1, 5))
-        headers = ['Element', 'Score'] if st.session_state.language == 'en' else ['要素', '得分']
+        headers = [config.lang_zh['element'] if st.session_state.language == 'zh' else config.lang_en['element'], config.lang_zh['score'] if st.session_state.language == 'zh' else config.lang_en['score']]
         data = [headers]
         for section, score in section_scores.items():
-            section_id = questionnaire[section]['name']['zh'] if st.session_state.language == 'zh' else questionnaire[section].get('id', section)
+            section_id = questionnaire[section]['name']['zh'] if st.session_state.language == 'zh' else questionnaire[section]['name']['en']
             data.append([section_id, f"{score:.1f}"])
         col_widths = [doc.width/2.0, doc.width/2.0]
         table = Table(data, colWidths=col_widths)
@@ -431,7 +430,7 @@ def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
         
         # 添加详细评估结果
         elements.append(Paragraph(
-            "Detailed Assessment Results" if st.session_state.language == 'en' else "详细评估结果",
+            config.lang_zh['detailed_assessment_results'] if st.session_state.language == 'zh' else config.lang_en['detailed_assessment_results'],
             heading2_style
         ))
         elements.append(Spacer(1, 15))
@@ -461,6 +460,23 @@ def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
                 key = f"{section}_{q_id}"
                 score = responses.get(key, 0)
                 question_weight = score_weights_config['question_weights'][section].get(q_id, 1)
+                # 计算实际得分
+                if question['type'] == "XO":
+                    actual_score = question_weight if score == 4 else 0
+                elif question['type'] == "PJ":
+                    actual_score = question_weight * (score / 4)
+                elif question['type'] == "PW":
+                    # 重新计算PW题的得分
+                    sub_questions = question.get("sub_questions", {}).get(st.session_state.language, [])
+                    sub_count = len(sub_questions)
+                    selected_count = 0
+                    for i in range(1, sub_count + 1):
+                        sub_key = f"{key}_sub_{i}"
+                        if st.session_state.sub_responses.get(sub_key, False):
+                            selected_count += 1
+                    actual_score = (question_weight / sub_count) * selected_count if sub_count else 0
+                else:
+                    actual_score = score
                 # 创建问题样式
                 question_style = ParagraphStyle(
                     'QuestionStyle',
@@ -469,7 +485,6 @@ def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
                     textColor=colors.HexColor('#2C3E50'),
                     spaceAfter=5
                 )
-                
                 # 创建得分样式
                 score_style = ParagraphStyle(
                     'ScoreStyle',
@@ -478,31 +493,29 @@ def create_pdf_report(section_scores, questionnaire, responses, sub_responses):
                     textColor=colors.HexColor('#E74C3C'),
                     spaceAfter=8
                 )
-                
                 # 添加问题描述和得分
-                question_text = "Question: " if st.session_state.language == 'en' else "问题："
-                type_text = "Type: " if st.session_state.language == 'en' else "类型："
-                score_text = "Score: " if st.session_state.language == 'en' else "得分："
-                weight_text = "Weight: " if st.session_state.language == 'en' else "分值权重："
-                
+                question_text = config.lang_zh['question'] if st.session_state.language == 'zh' else config.lang_en['question']
+                type_text = config.lang_zh['type'] if st.session_state.language == 'zh' else config.lang_en['type']
+                score_text = config.lang_zh['score'] if st.session_state.language == 'zh' else config.lang_en['score']
+                weight_text = config.lang_zh['weight'] if st.session_state.language == 'zh' else config.lang_en['weight']
                 description = get_translated_text(question["description"], st.session_state.language)
                 elements.append(Paragraph(f"{question_text}{description}", question_style))
                 elements.append(Paragraph(f"{type_text}{question['type']}", normal_style))
-                elements.append(Paragraph(f"{score_text}{score}", score_style))
+                elements.append(Paragraph(f"{score_text}{actual_score:.1f}", score_style))
                 elements.append(Paragraph(f"{weight_text}{question_weight}", normal_style))
                 
                 # 如果是多选题，添加子问题得分
                 if question['type'] == "PW" and "sub_questions" in question:
                     sub_questions = question["sub_questions"].get(st.session_state.language, [])
-                    sub_scores_text = "Sub-question scores: " if st.session_state.language == 'en' else "子问题得分："
+                    sub_scores_text = config.lang_zh['sub_question_scores'] if st.session_state.language == 'zh' else config.lang_en['sub_question_scores']
                     elements.append(Paragraph(sub_scores_text, normal_style))
                     sub_count = len(sub_questions)
                     question_weight = score_weights_config['question_weights'][section].get(q_id, 1)
                     for i, sub_q in enumerate(sub_questions, 1):
                         sub_key = f"{key}_sub_{i}"
                         sub_score = st.session_state.sub_responses.get(sub_key, False)
-                        yes_text = "Yes" if st.session_state.language == 'en' else "是"
-                        no_text = "No" if st.session_state.language == 'en' else "否"
+                        yes_text = config.lang_zh['answer_yes'] if st.session_state.language == 'zh' else config.lang_en['answer_yes']
+                        no_text = config.lang_zh['answer_no'] if st.session_state.language == 'zh' else config.lang_en['answer_no']
                         # 子问题得分为题目权重/子项数
                         sub_score_value = question_weight / sub_count if sub_score else 0
                         if st.session_state.language == 'en':
@@ -570,46 +583,46 @@ def main():
             # 简化语言切换为两个按钮
             col1, col2 = st.columns(2)
             with col1:
-                if st.button("中文", type="primary" if st.session_state.language == 'zh' else "secondary"):
+                if st.button(config.lang_zh['zh_button'] if st.session_state.language == 'zh' else config.lang_en['zh_button'], type="primary" if st.session_state.language == 'zh' else "secondary"):
                     st.session_state.language = 'zh'
                     st.rerun()
             with col2:
-                if st.button("English", type="primary" if st.session_state.language == 'en' else "secondary"):
+                if st.button(config.lang_zh['en_button'] if st.session_state.language == 'en' else config.lang_en['en_button'], type="primary" if st.session_state.language == 'en' else "secondary"):
                     st.session_state.language = 'en'
                     st.rerun()
             
             # 添加标题
-            st.title("ISO 55013 Assessment Toolkit" if st.session_state.language == 'en' else "ISO 55013 评估工具")
+            st.title(config.lang_zh['app_title'] if st.session_state.language == 'zh' else config.lang_en['app_title'])
             
             st.markdown("---")
             
             # 添加保存和加载按钮
             col1, col2 = st.columns(2)
             with col1:
-                save_text = "Save Progress" if st.session_state.language == 'en' else "保存当前进度"
+                save_text = config.lang_zh['save_progress'] if st.session_state.language == 'zh' else config.lang_en['save_progress']
                 if st.button(save_text, key="save_button"):
                     try:
                         save_assessment_results(st.session_state.responses, st.session_state.sub_responses)
                         st.session_state.last_save_time = datetime.now()
-                        st.success("Progress saved!" if st.session_state.language == 'en' else "进度已保存！")
+                        st.success(config.lang_zh['progress_saved'] if st.session_state.language == 'zh' else config.lang_en['progress_saved'])
                     except Exception as e:
-                        st.error(f"Error saving progress: {str(e)}" if st.session_state.language == 'en' else f"保存进度时出错: {str(e)}")
+                        st.error(f"{config.lang_zh['error_saving_progress']} {str(e)}" if st.session_state.language == 'zh' else f"{config.lang_en['error_saving_progress']} {str(e)}")
             
             with col2:
-                load_text = "Load Progress" if st.session_state.language == 'en' else "加载上次进度"
+                load_text = config.lang_zh['load_progress'] if st.session_state.language == 'zh' else config.lang_en['load_progress']
                 if st.button(load_text, key="load_button"):
                     try:
                         responses, sub_responses = load_latest_assessment_results()
                         st.session_state.responses = responses
                         st.session_state.sub_responses = sub_responses
                         st.session_state.force_refresh = True
-                        st.success("Last progress loaded!" if st.session_state.language == 'en' else "已加载上次保存的进度！")
+                        st.success(config.lang_zh['last_progress_loaded'] if st.session_state.language == 'zh' else config.lang_en['last_progress_loaded'])
                         st.rerun()
                     except Exception as e:
-                        st.error(f"Error loading progress: {str(e)}" if st.session_state.language == 'en' else f"加载进度时出错: {str(e)}")
+                        st.error(f"{config.lang_zh['error_loading_progress']} {str(e)}" if st.session_state.language == 'zh' else f"{config.lang_en['error_loading_progress']} {str(e)}")
             
             # 显示上次保存时间
-            last_save_text = "Last saved: " if st.session_state.language == 'en' else "上次保存时间："
+            last_save_text = config.lang_zh['last_saved'] if st.session_state.language == 'zh' else config.lang_en['last_saved']
             st.markdown(f"{last_save_text}{st.session_state.last_save_time.strftime('%Y-%m-%d %H:%M:%S')}")
             
             st.markdown("---")
@@ -629,7 +642,7 @@ def main():
                 """)
 
         # 创建选项卡
-        tab_titles = ["System Assessment", "Result Analysis", "Report Export"] if st.session_state.language == 'en' else ["体系评估", "结果分析", "报告导出"]
+        tab_titles = [config.lang_zh['system_assessment'] if st.session_state.language == 'zh' else config.lang_en['system_assessment'], config.lang_zh['result_analysis'] if st.session_state.language == 'zh' else config.lang_en['result_analysis'], config.lang_zh['report_export'] if st.session_state.language == 'zh' else config.lang_en['report_export']]
         tabs = st.tabs(tab_titles)
         
         # 评估标签页
@@ -663,7 +676,7 @@ def main():
                                         'en': {0: "No", 4: "Yes"}
                                     }
                                     st.session_state.responses[key] = st.radio(
-                                        "Score" if st.session_state.language == 'en' else "评分",
+                                        config.lang_zh['score'] if st.session_state.language == 'zh' else config.lang_en['score'],
                                         options=[0, 4],
                                         format_func=lambda x: yes_no_options[st.session_state.language][x],
                                         horizontal=True,
@@ -699,7 +712,7 @@ def main():
                                     except Exception:
                                         index = 0
                                     st.session_state.responses[key] = st.selectbox(
-                                        "Score" if st.session_state.language == 'en' else "评分",
+                                        config.lang_zh['score'] if st.session_state.language == 'zh' else config.lang_en['score'],
                                         options=[0, 1, 2, 3, 4],
                                         format_func=lambda x: score_labels[st.session_state.language][x],
                                         key=f"select_{section}_{q_id}",
@@ -728,7 +741,7 @@ def main():
                     try:
                         save_assessment_results(st.session_state.responses, st.session_state.sub_responses)
                         st.session_state.last_save_time = current_time
-                        auto_save_text = "Progress auto-saved" if st.session_state.language == 'en' else "进度已自动保存"
+                        auto_save_text = config.lang_zh['progress_auto_saved'] if st.session_state.language == 'zh' else config.lang_en['progress_auto_saved']
                         st.toast(auto_save_text, icon="💾")
                     except Exception as e:
                         logging.error(f"自动保存失败: {str(e)}")
@@ -778,7 +791,7 @@ def main():
                     # 只显示1000分制得分
                     total_score = calculate_total_score(section_scores)
                     st.metric(
-                        "总体评分" if st.session_state.language == 'zh' else "Overall Score",
+                        config.lang_zh['overall_score'] if st.session_state.language == 'zh' else config.lang_en['overall_score'],
                         f"{total_score:.1f}/1000"
                     )
                 
@@ -787,9 +800,9 @@ def main():
                 if radar_chart:
                     st.plotly_chart(radar_chart, use_container_width=True)
                 else:
-                    st.warning("Cannot generate radar chart" if st.session_state.language == 'en' else "无法生成雷达图")
+                    st.warning(config.lang_en['cannot_generate_radar_chart'] if st.session_state.language == 'en' else config.lang_zh['cannot_generate_radar_chart'])
                 # 显示详细得分（去除百分比进度条，仅保留分数）
-                st.subheader("Element Scores" if st.session_state.language == 'en' else "要素得分")
+                st.subheader(config.lang_zh['element_scores'] if st.session_state.language == 'zh' else config.lang_en['element_scores'])
                 cols = st.columns(3)
                 for i, (section, score) in enumerate(section_scores.items()):
                     with cols[i % 3]:
@@ -806,9 +819,9 @@ def main():
             try:
                 col1, col2 = st.columns(2)
                 with col1:
-                    excel_btn_text = "Generate Excel Report" if st.session_state.language == 'en' else "生成Excel报告"
+                    excel_btn_text = config.lang_zh['generate_excel_report'] if st.session_state.language == 'zh' else config.lang_en['generate_excel_report']
                     if st.button(excel_btn_text, key="generate_excel_report"):
-                        with st.spinner("Generating Excel report..." if st.session_state.language == 'en' else "正在生成Excel报告..."):
+                        with st.spinner(config.lang_zh['generating_excel_report'] if st.session_state.language == 'zh' else config.lang_en['generating_excel_report']):
                             # 创建报告数据
                             report_data = []
                             for section, section_data in questionnaire.items():
@@ -816,7 +829,23 @@ def main():
                                 for q_id, question in section_data.get('questions', {}).items():
                                     key = f"{section}_{q_id}"
                                     score = st.session_state.responses.get(key, 0)
-                                    
+                                    question_weight = score_weights_config['question_weights'][section].get(q_id, 1)
+                                    if question["type"] == "XO":
+                                        actual_score = question_weight if score == 4 else 0
+                                    elif question["type"] == "PJ":
+                                        actual_score = question_weight * (score / 4)
+                                    elif question["type"] == "PW":
+                                        # 重新计算PW题的得分
+                                        sub_questions = question.get("sub_questions", {}).get(st.session_state.language, [])
+                                        sub_count = len(sub_questions)
+                                        selected_count = 0
+                                        for i in range(1, sub_count + 1):
+                                            sub_key = f"{key}_sub_{i}"
+                                            if st.session_state.sub_responses.get(sub_key, False):
+                                                selected_count += 1
+                                        actual_score = (question_weight / sub_count) * selected_count if sub_count else 0
+                                    else:
+                                        actual_score = score
                                     # 获取子问题得分（如果是多选题）
                                     sub_scores = []
                                     if question["type"] == "PW" and "sub_questions" in question:
@@ -828,7 +857,6 @@ def main():
                                                 "sub_question": sub_q,
                                                 "score": "Yes" if sub_score == 4 else "No" if st.session_state.language == 'en' else "是" if sub_score == 4 else "否"
                                             })
-                                    
                                     score_labels = {
                                         'zh': {
                                             0: "未实施",
@@ -845,12 +873,11 @@ def main():
                                             4: "Fully Implemented"
                                         }
                                     }
-
                                     report_data.append({
                                         "element": section_id,
                                         "question_type": question["type"],
                                         "question": get_translated_text(question["description"], st.session_state.language),
-                                        "score": score,
+                                        "score": actual_score,
                                         "assessment": score_labels[st.session_state.language][round(score)] if question["type"] != "XO" else 
                                                     ("Yes" if score == 4 else "No" if st.session_state.language == 'en' else "是" if score == 4 else "否"),
                                         "weight": score_weights_config['question_weights'][section].get(q_id, 1),
@@ -864,54 +891,54 @@ def main():
                             
                             try:
                                 with pd.ExcelWriter(filename, engine='openpyxl') as writer:
-                                    sheet_name = 'Assessment Results' if st.session_state.language == 'en' else '评估结果'
+                                    sheet_name = config.lang_zh['assessment_results'] if st.session_state.language == 'zh' else config.lang_en['assessment_results']
                                     df.to_excel(writer, index=False, sheet_name=sheet_name)
                                     
                                     # 创建雷达图数据工作表
                                     radar_data = pd.DataFrame({
-                                        'Element' if st.session_state.language == 'en' else '要素': list(section_scores.keys()),
-                                        'Score' if st.session_state.language == 'en' else '得分': [f"{v:.1f}" for v in section_scores.values()]
+                                        config.lang_zh['element'] if st.session_state.language == 'zh' else config.lang_en['element']: list(section_scores.keys()),
+                                        config.lang_zh['score'] if st.session_state.language == 'zh' else config.lang_en['score']: [f"{v:.1f}" for v in section_scores.values()]
                                     })
-                                    radar_sheet_name = 'Radar Chart Data' if st.session_state.language == 'en' else '雷达图数据'
+                                    radar_sheet_name = config.lang_zh['radar_chart_data'] if st.session_state.language == 'zh' else config.lang_en['radar_chart_data']
                                     radar_data.to_excel(writer, index=False, sheet_name=radar_sheet_name)
                                 
                                 # 提供下载链接
                                 with open(filename, 'rb') as f:
-                                    download_label = "Download Excel Report" if st.session_state.language == 'en' else "下载Excel报告"
+                                    download_label = config.lang_zh['download_excel_report'] if st.session_state.language == 'zh' else config.lang_en['download_excel_report']
                                     st.download_button(
                                         label=download_label,
                                         data=f,
                                         file_name=filename,
                                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                                     )
-                                success_msg = "Excel report generated successfully" if st.session_state.language == 'en' else "Excel报告生成成功"
+                                success_msg = config.lang_zh['excel_report_generated'] if st.session_state.language == 'zh' else config.lang_en['excel_report_generated']
                                 st.success(success_msg)
                             except Exception as e:
-                                error_msg = f"Error generating Excel report: {str(e)}" if st.session_state.language == 'en' else f"生成Excel报告时出错: {str(e)}"
+                                error_msg = config.lang_zh['error_generating_excel_report'] if st.session_state.language == 'zh' else config.lang_en['error_generating_excel_report']
                                 st.error(error_msg)
                                 logging.error(error_msg)
                                 logging.error(traceback.format_exc())
                 
                 with col2:
-                    pdf_btn_text = "Generate PDF Report" if st.session_state.language == 'en' else "生成PDF报告"
+                    pdf_btn_text = config.lang_zh['generate_pdf_report'] if st.session_state.language == 'zh' else config.lang_en['generate_pdf_report']
                     if st.button(pdf_btn_text, key="generate_pdf_report"):
-                        spinner_text = "Generating PDF report..." if st.session_state.language == 'en' else "正在生成PDF报告..."
+                        spinner_text = config.lang_zh['generating_pdf_report'] if st.session_state.language == 'zh' else config.lang_en['generating_pdf_report']
                         with st.spinner(spinner_text):
                             pdf_buffer = create_pdf_report(section_scores, questionnaire, st.session_state.responses, st.session_state.sub_responses)
                             if pdf_buffer:
                                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                                 filename = f"ISO55013_{'Assessment_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.pdf"
-                                download_label = "Download PDF Report" if st.session_state.language == 'en' else "下载PDF报告"
+                                download_label = config.lang_zh['download_pdf_report'] if st.session_state.language == 'zh' else config.lang_en['download_pdf_report']
                                 st.download_button(
                                     label=download_label,
                                     data=pdf_buffer,
                                     file_name=filename,
                                     mime="application/pdf"
                                 )
-                                success_msg = "PDF report generated successfully" if st.session_state.language == 'en' else "PDF报告生成成功"
+                                success_msg = config.lang_zh['pdf_report_generated'] if st.session_state.language == 'zh' else config.lang_en['pdf_report_generated']
                                 st.success(success_msg)
                             else:
-                                error_msg = "Failed to generate PDF report" if st.session_state.language == 'en' else "生成PDF报告失败"
+                                error_msg = config.lang_zh['failed_generating_pdf_report'] if st.session_state.language == 'zh' else config.lang_en['failed_generating_pdf_report']
                                 st.error(error_msg)
             
             except Exception as e:
