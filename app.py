@@ -65,9 +65,9 @@ def init_db():
         logging.error(traceback.format_exc())
         raise
 
-# 保存审核结果
+# 保存评估结果
 def save_audit_results(responses, sub_responses):
-    """保存审核结果"""
+    """保存评估结果"""
     try:
         with get_db_connection() as conn:
             c = conn.cursor()
@@ -78,15 +78,15 @@ def save_audit_results(responses, sub_responses):
                   json.dumps(responses), 
                   json.dumps(sub_responses)))
             conn.commit()
-        logging.info("审核结果保存成功")
+        logging.info("结果保存成功")
     except Exception as e:
-        logging.error(f"保存审核结果失败: {str(e)}")
+        logging.error(f"保存结果失败: {str(e)}")
         logging.error(traceback.format_exc())
         raise
 
-# 加载最近的审核结果
+# 加载最近的评估结果
 def load_latest_audit_results():
-    """加载最近的审核结果"""
+    """加载最近的评估结果"""
     try:
         with get_db_connection() as conn:
             c = conn.cursor()
@@ -102,7 +102,7 @@ def load_latest_audit_results():
                 return json.loads(result[0]), json.loads(result[1])
             return {}, {}
     except Exception as e:
-        logging.error(f"加载审核结果失败: {str(e)}")
+        logging.error(f"加载结果失败: {str(e)}")
         logging.error(traceback.format_exc())
         return {}, {}
 
@@ -120,9 +120,9 @@ def init_session_state():
     if 'language' not in st.session_state:
         st.session_state.language = 'zh'  # 默认中文
 
-# 加载审核问题
+# 加载评估问题
 def load_audit_questions():
-    """加载审核问题"""
+    """加载问题"""
     try:
         # 加载中文问题
         with open('audit_questions.yaml', 'r', encoding='utf-8') as file:
@@ -132,7 +132,7 @@ def load_audit_questions():
         with open('audit_questions_en.yaml', 'r', encoding='utf-8') as file:
             questions_en = yaml.safe_load(file)
         
-        logging.info("成功加载审核问题")
+        logging.info("成功加载问题")
         
         # 合并中英文内容
         formatted_questions = {}
@@ -188,7 +188,7 @@ def load_audit_questions():
         
         return formatted_questions
     except Exception as e:
-        logging.error(f"加载审核问题失败: {str(e)}")
+        logging.error(f"加载问题失败: {str(e)}")
         logging.error(traceback.format_exc())
         raise
 
@@ -367,7 +367,7 @@ def create_pdf_report(section_scores, audit_questions, responses, sub_responses)
         elements = []
         
         # 添加标题
-        title = "ISO 55001 Audit Report" if st.session_state.language == 'en' else "ISO 55001 审核报告"
+        title = "ISO 55001 Audit Report" if st.session_state.language == 'en' else "ISO 55001 评估报告"
         # 组合第一页内容
         first_page_content = []
         first_page_content.append(Paragraph(title, title_style))
@@ -526,7 +526,7 @@ init_db()
 
 # 设置页面配置
 st.set_page_config(
-    page_title="ISO 55001 审核工具",
+    page_title="ISO 55001 评估工具",
     page_icon=None,
     layout="wide",
     initial_sidebar_state="expanded"
@@ -558,11 +558,11 @@ def main():
         # 初始化会话状态
         init_session_state()
         
-        # 加载审核问题
+        # 加载评估问题
         try:
             audit_questions = load_audit_questions()
         except Exception as e:
-            st.error(f"加载审核问题时出错: {str(e)}")
+            st.error(f"加载评估问题时出错: {str(e)}")
             return
 
         # 添加侧边栏
@@ -579,7 +579,7 @@ def main():
                     st.rerun()
             
             # 添加标题
-            st.title("ISO 55001 Audit Tool" if st.session_state.language == 'en' else "ISO 55001 审核工具")
+            st.title("ISO 55001 Assessment Toolkit" if st.session_state.language == 'en' else "ISO 55001 评估工具")
             
             st.markdown("---")
             
@@ -623,16 +623,16 @@ def main():
             else:
                 st.markdown("""
                 #### 问题类型说明
-                - PJ：主观判断。问题的评分基于"专业判断"，审核员须依照评分原则判断其符合程度。审核员可基于判断，给出零分至满分。
+                - PJ：主观判断。问题的评分基于"专业判断"，依照评分原则判断其符合程度。可基于判断，给出零分至满分。
                 - XO：是否判断。问题的回答只有是或者否两种答案，"是"得满分，"否"不得分。任何活动要得分的话，其至少应到达"90%符合"，60%的相关人员理解相关的内容和要求，执行时间不少于三个月。除此之外任何其他情形打零分。
                 - PW：多项选择。当问题含有几个组成部分时，可以得到每一部分得分，总和为最终得分。任何活动要得分的话，其至少应到达"90%符合"，60%的相关人员理解相关的内容和要求，执行时间不少于三个月。除此之外任何其他情形打零分。
                 """)
 
         # 创建选项卡
-        tab_titles = ["Audit Assessment", "Result Analysis", "Report Export"] if st.session_state.language == 'en' else ["审核评估", "结果分析", "报告导出"]
+        tab_titles = ["System Assessment", "Result Analysis", "Report Export"] if st.session_state.language == 'en' else ["体系评估", "结果分析", "报告导出"]
         tabs = st.tabs(tab_titles)
         
-        # 审核评估标签页
+        # 评估标签页
         with tabs[0]:
             try:
                 for section, section_data in audit_questions.items():
@@ -734,8 +734,8 @@ def main():
                         logging.error(f"自动保存失败: {str(e)}")
             
             except Exception as e:
-                st.error(f"渲染审核评估页面时出错: {str(e)}")
-                logging.error(f"渲染审核评估页面失败: {str(e)}")
+                st.error(f"渲染评估页面时出错: {str(e)}")
+                logging.error(f"渲染评估页面失败: {str(e)}")
                 logging.error(traceback.format_exc())
 
         # 结果分析标签页
@@ -860,11 +860,11 @@ def main():
                             # 创建DataFrame并导出为Excel
                             df = pd.DataFrame(report_data)
                             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                            filename = f"ISO55001_{'Audit_Report' if st.session_state.language == 'en' else '审核报告'}_{timestamp}.xlsx"
+                            filename = f"ISO55001_{'Audit_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.xlsx"
                             
                             try:
                                 with pd.ExcelWriter(filename, engine='openpyxl') as writer:
-                                    sheet_name = 'Audit Results' if st.session_state.language == 'en' else '审核结果'
+                                    sheet_name = 'Audit Results' if st.session_state.language == 'en' else '评估结果'
                                     df.to_excel(writer, index=False, sheet_name=sheet_name)
                                     
                                     # 创建雷达图数据工作表
@@ -900,7 +900,7 @@ def main():
                             pdf_buffer = create_pdf_report(section_scores, audit_questions, st.session_state.responses, st.session_state.sub_responses)
                             if pdf_buffer:
                                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                                filename = f"ISO55001_{'Audit_Report' if st.session_state.language == 'en' else '审核报告'}_{timestamp}.pdf"
+                                filename = f"ISO55001_{'Audit_Report' if st.session_state.language == 'en' else '评估报告'}_{timestamp}.pdf"
                                 download_label = "Download PDF Report" if st.session_state.language == 'en' else "下载PDF报告"
                                 st.download_button(
                                     label=download_label,
